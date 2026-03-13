@@ -1,123 +1,93 @@
-import { recipes } from "@/data/recipes"; // تأكد من المسار الصحيح لبياناتك
-import { notFound } from "next/navigation";
-import { Metadata } from "next";
+import { recipes } from "@/data/recipes" // تأكد أن المسار يؤدي لمصفوفة الوصفات
+import { notFound } from "next/navigation"
+import { Metadata } from "next"
 
-// 1. تعريف الأنواع (Types) لضمان توافق تام مع TypeScript و Next.js 15
-type Props = {
+// 1. تعريف الأنواع لضمان توافق تام مع TypeScript و Next.js 15
+interface PageProps {
   params: Promise<{ slug: string }>;
-};
+}
 
-// 2. دالة توليد الميتا داتا لتحسين الـ SEO
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+// 2. توليد الميتا داتا (العنوان والوصف في جوجل)
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const recipe = recipes.find((r) => r.slug === slug);
   
   if (!recipe) return { title: "الوصفة غير موجودة" };
   
   return {
-    title: `${recipe.title} - مطبخ كايبر لايف`,
-    description: `تعرفي على أسهل طريقة لتحضير ${recipe.title} بمكونات اقتصادية وخطوات احترافية.`,
+    title: `${recipe.title} | TastyRecipes`,
+    description: `تعلمي طريقة عمل ${recipe.title} الأصلية بخطوات سهلة ومقادير دقيقة.`,
   };
 }
 
-// 3. المكون الرئيسي للصفحة (Page Component)
-export default async function RecipePage({ params }: Props) {
-  // فك تشفير الـ params لأنها Promise في النسخ الجديدة
+// 3. مكون الصفحة الرئيسي
+export default async function RecipePage({ params }: PageProps) {
+  // يجب استخدام await لفك تشفير params في Next.js 15
   const { slug } = await params;
   const recipe = recipes.find((r) => r.slug === slug);
 
   if (!recipe) return notFound();
 
-  // نظام JSON-LD لمساعدة جوجل في عرض الوصفة بشكل غني (Rich Results)
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Recipe",
-    "name": recipe.title,
-    "image": recipe.image,
-    "description": `طريقة عمل ${recipe.title} الأصلية.`,
-    "recipeCategory": recipe.category,
-    "prepTime": `PT${recipe.time}M`,
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": recipe.rating,
-      "ratingCount": "20"
-    }
-  };
-
   return (
-    <article className="max-w-5xl mx-auto px-4 sm:px-6 py-8 md:py-12" dir="rtl">
-      {/* حقن بيانات الـ Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-
-      {/* الرأس (Header) - متجاوب تماماً */}
-      <header className="mb-10 text-center">
-        <div className="inline-block px-4 py-1 mb-4 text-xs font-bold tracking-widest text-amber-700 uppercase bg-amber-100 rounded-full">
+    <article className="max-w-4xl mx-auto px-4 py-10" dir="rtl">
+      {/* رأس الوصفة */}
+      <div className="text-center mb-10">
+        <span className="text-amber-600 font-bold text-sm uppercase tracking-widest">
           {recipe.category}
-        </div>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black leading-tight text-gray-900 mb-6">
+        </span>
+        <h1 className="text-4xl md:text-5xl font-black text-slate-900 mt-4 mb-6">
           {recipe.title}
         </h1>
-        <div className="flex flex-wrap justify-center gap-4 sm:gap-8 text-sm font-medium text-gray-500">
-          <span className="flex items-center gap-2">⏱️ {recipe.time} دقيقة</span>
-          <span className="flex items-center gap-2">⭐ {recipe.rating} تقييم</span>
+        <div className="flex justify-center gap-6 text-slate-500 font-medium">
+          <span>⏱️ {recipe.time} دقيقة</span>
+          <span>⭐ {recipe.rating}</span>
         </div>
-      </header>
+      </div>
 
-      {/* الصورة الكبيرة - تصميم متجاوب (Aspect Ratio) */}
-      <div className="relative aspect-video w-full mb-12 overflow-hidden shadow-2xl rounded-2xl md:rounded-[3rem]">
+      {/* صورة الوصفة المتجاوبة */}
+      <div className="relative aspect-video w-full mb-12 rounded-[2rem] overflow-hidden shadow-2xl">
         <img 
           src={recipe.image} 
-          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
-          alt={recipe.title} 
+          alt={recipe.title}
+          className="w-full h-full object-cover"
         />
       </div>
 
-      {/* المحتوى - مقسم لشبكة (Grid) تتغير حسب الشاشة */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-        
-        {/* المكونات - تأخذ مساحة أقل في الشاشات الكبيرة */}
-        <aside className="lg:col-span-4 bg-gray-50 p-6 sm:p-8 rounded-3xl border border-gray-100 h-fit">
-          <h2 className="text-2xl font-bold mb-6 text-gray-900 border-b-2 border-amber-500 pb-2 inline-block">
+      <div className="grid md:grid-cols-3 gap-12">
+        {/* المكونات */}
+        <div className="md:col-span-1">
+          <h2 className="text-2xl font-bold mb-6 text-slate-900 border-r-4 border-amber-500 pr-3">
             المكونات
           </h2>
-          <ul className="space-y-4">
-            {recipe.ingredients.map((ing, idx) => (
-              <li key={idx} className="flex items-start gap-3 text-gray-700">
-                <span className="mt-1.5 w-2 h-2 bg-amber-500 rounded-full flex-shrink-0" />
-                <span className="text-lg">{ing}</span>
+          <ul className="space-y-4 text-slate-700">
+            {recipe.ingredients.map((ing, index) => (
+              <li key={index} className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 bg-amber-500 rounded-full" />
+                {ing}
               </li>
             ))}
           </ul>
-        </aside>
+        </div>
 
-        {/* الطريقة - تأخذ مساحة أكبر */}
-        <main className="lg:col-span-8">
-          <h2 className="text-2xl font-bold mb-8 text-gray-900">طريقة التحضير</h2>
-          <div className="space-y-10">
+        {/* الخطوات */}
+        <div className="md:col-span-2">
+          <h2 className="text-2xl font-bold mb-6 text-slate-900 border-r-4 border-amber-500 pr-3">
+            طريقة التحضير
+          </h2>
+          <div className="space-y-8">
             {recipe.steps.map((step, index) => (
-              <div key={index} className="flex gap-5 sm:gap-8 group">
-                <div className="flex-shrink-0 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-amber-500 text-white font-black text-xl shadow-lg shadow-amber-200 group-hover:rotate-12 transition-transform">
+              <div key={index} className="flex gap-4">
+                <div className="flex-shrink-0 w-8 h-8 bg-slate-900 text-white rounded-full flex items-center justify-center font-bold">
                   {index + 1}
                 </div>
-                <p className="text-lg sm:text-xl text-gray-700 leading-relaxed pt-1">
+                <p className="text-slate-700 leading-loose text-lg">
                   {step}
                 </p>
               </div>
             ))}
           </div>
-
-          {/* نصيحة إضافية للمسة احترافية */}
-          {recipe.proTips && (
-            <div className="mt-16 p-6 bg-blue-50 border-r-8 border-blue-500 rounded-xl">
-              <h3 className="text-blue-900 font-bold text-xl mb-2">💡 نصيحة سرية:</h3>
-              <p className="text-blue-800 text-lg leading-relaxed">{recipe.proTips}</p>
-            </div>
-          )}
-        </main>
+        </div>
       </div>
     </article>
-  );
+  )
 }
