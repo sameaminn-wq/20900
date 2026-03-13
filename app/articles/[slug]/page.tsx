@@ -1,29 +1,32 @@
-import { recipes } from "@/data/recipes" // تأكد أن المسار يؤدي لمصفوفة الوصفات
-import { notFound } from "next/navigation"
-import { Metadata } from "next"
+// ./app/recipes/[slug]/page.tsx
+import Image from "next/image";
+import { recipes } from "@/data/recipes"; // تأكد أن المسار صحيح
+import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
-// 1. تعريف الأنواع لضمان توافق تام مع TypeScript و Next.js 15
+// ✅ تعريف الأنواع بشكل صحيح
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: {
+    slug: string;
+  };
 }
 
-// 2. توليد الميتا داتا (العنوان والوصف في جوجل)
+// 1️⃣ توليد الميتا داتا (SEO)
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } = params;
   const recipe = recipes.find((r) => r.slug === slug);
-  
+
   if (!recipe) return { title: "الوصفة غير موجودة" };
-  
+
   return {
     title: `${recipe.title} | TastyRecipes`,
     description: `تعلمي طريقة عمل ${recipe.title} الأصلية بخطوات سهلة ومقادير دقيقة.`,
   };
 }
 
-// 3. مكون الصفحة الرئيسي
-export default async function RecipePage({ params }: PageProps) {
-  // يجب استخدام await لفك تشفير params في Next.js 15
-  const { slug } = await params;
+// 2️⃣ مكون الصفحة الرئيسي
+export default function RecipePage({ params }: PageProps) {
+  const { slug } = params;
   const recipe = recipes.find((r) => r.slug === slug);
 
   if (!recipe) return notFound();
@@ -44,12 +47,15 @@ export default async function RecipePage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* صورة الوصفة المتجاوبة */}
+      {/* صورة الوصفة باستخدام next/image */}
       <div className="relative aspect-video w-full mb-12 rounded-[2rem] overflow-hidden shadow-2xl">
-        <img 
-          src={recipe.image} 
+        <Image
+          src={recipe.image}
           alt={recipe.title}
-          className="w-full h-full object-cover"
+          fill
+          style={{ objectFit: "cover" }}
+          className="rounded-[2rem]"
+          priority
         />
       </div>
 
@@ -80,14 +86,12 @@ export default async function RecipePage({ params }: PageProps) {
                 <div className="flex-shrink-0 w-8 h-8 bg-slate-900 text-white rounded-full flex items-center justify-center font-bold">
                   {index + 1}
                 </div>
-                <p className="text-slate-700 leading-loose text-lg">
-                  {step}
-                </p>
+                <p className="text-slate-700 leading-loose text-lg">{step}</p>
               </div>
             ))}
           </div>
         </div>
       </div>
     </article>
-  )
+  );
 }
