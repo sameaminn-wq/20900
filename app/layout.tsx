@@ -2,8 +2,18 @@ import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import "./globals.css"
 import React from "react"
+import { Metadata } from 'next' 
 // 1. استيراد Analytics من Vercel
 import { Analytics } from "@vercel/analytics/next"
+
+/**
+ * إعدادات الـ Metadata: ت إضافة كود تحقق جوجل فقط
+ */
+export const metadata: Metadata = {
+  verification: {
+    google: 'BJkbkAmhKK1kKtcmHmCXdnY37N9RqTIbWCidziUp8DE',
+  },
+}
 
 /**
  * RootLayoutProps: تعريف الأنواع لضمان توافق تام مع TypeScript و React 18+
