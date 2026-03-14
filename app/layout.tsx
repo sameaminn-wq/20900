@@ -2,6 +2,8 @@ import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import "./globals.css"
 import React from "react"
+// 1. استيراد Analytics من Vercel
+import { Analytics } from "@vercel/analytics/next"
 
 /**
  * RootLayoutProps: تعريف الأنواع لضمان توافق تام مع TypeScript و React 18+
@@ -21,13 +23,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
           {/* شريط التنقل العلوي */}
           <Navbar />
 
-          {/* المحتوى الرئيسي:
-            - min-h-screen: لضمان بقاء الفوتر في الأسفل دائماً حتى لو كان المحتوى قليلاً.
-            - flex-grow: تجعل المحتوى يتمدد لملء الفراغ.
-            - px-4/sm:px-6/lg:px-8: نظام هوامش متطور يتغير حسب حجم شاشة الموبايل أو التابلت.
-          */}
+          {/* المحتوى الرئيسي */}
           <main className="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10 lg:py-12 transition-all duration-300">
             {children}
+            {/* 2. وضع مكون التحليلات داخل المحتوى ليعمل في كل الصفحات */}
+            <Analytics />
           </main>
 
           {/* تذييل الصفحة */}
