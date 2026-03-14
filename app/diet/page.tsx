@@ -43,10 +43,12 @@ export default function DietPage() {
         </div>
       )}
 
-      {/* نصيحة دايت سريعة في الأسفل */}
+      {/* نصيحة دايت سريعة في الأسفل - تم حل مشكلة علامات التنصيص هنا */}
       <footer className="mt-20 p-8 bg-slate-900 rounded-3xl text-center text-white">
         <h3 className="text-xl font-bold mb-2">💡 نصيحة TastyRecipes اليوم</h3>
-        <p className="text-slate-400 italic">"الأكل الصحي ليس حرماناً، بل هو فن اختيار البدائل الأذكى لذات الطعم الرائع."</p>
+        <p className="text-slate-400 italic">
+          &quot;الأكل الصحي ليس حرماناً، بل هو فن اختيار البدائل الأذكى لذات الطعم الرائع.&quot;
+        </p>
       </footer>
     </div>
   );
