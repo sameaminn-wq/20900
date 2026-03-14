@@ -854,7 +854,7 @@ export const recipes = [
     {
       slug: "one-pot-chicken-rice",
       title: "قدر الدجاج والأرز: وجبة الغداء السريعة في وعاء واحد",
-      category: "fast",
+      category: "fastest",
       time: 30,
       rating: 4.7,
       image: "https://images.unsplash.com/photo-1512058560366-cd242745541f?q=80&w=600&auto=format&fit=crop",
@@ -898,7 +898,7 @@ export const recipes = [
     {
       slug: "quick-tuna-salad-sandwich",
       title: "ساندوتش سلطة التونة الصحي: وجبة عشاء أو جيم في 5 دقائق",
-      category: "fast",
+      category: "fastest",
       time: 5,
       rating: 4.6,
       image: "https://images.unsplash.com/photo-1540713434306-58505cf1b6fc?q=80&w=600&auto=format&fit=crop",
@@ -942,7 +942,7 @@ export const recipes = [
     {
       slug: "quick-quesadilla-chicken",
       title: "كيساديـا الدجاج المكسيكية: أسرع ساندوتش جبن سايح في المقلاة",
-      category: "fast",
+      category: "fastest",
       time: 15,
       rating: 4.8,
       image: "https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?q=80&w=600&auto=format&fit=crop",
@@ -986,7 +986,7 @@ export const recipes = [
     {
       slug: "quick-nutella-crepe",
       title: "كريب النوتيلا السريع: حلوى المطاعم في منزلك خلال دقائق",
-      category: "fast",
+      category: "fastest",
       time: 15,
       rating: 4.7,
       image: "https://images.unsplash.com/photo-1519676867240-f03562e64548?q=80&w=600&auto=format&fit=crop",
@@ -1115,7 +1115,7 @@ export const recipes = [
     {
       slug: "quick-vegetable-omelette",
       title: "أومليت الخضروات الفرنسي: وجبة فطور سريعة ومتكاملة",
-      category: "fast",
+      category: "fastest",
       time: 10,
       rating: 4.5,
       image: "https://images.unsplash.com/photo-1510629595363-601216ee89f8?q=80&w=600&auto=format&fit=crop",
@@ -1179,7 +1179,7 @@ export const recipes = [
     {
       slug: "quick-beef-tacos",
       title: "تاكو اللحم السريع: نكهة مكسيكية في ساندوتش واحد",
-      category: "fast",
+      category: "fastest",
       time: 20,
       rating: 4.6,
       image: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?q=80&w=600&auto=format&fit=crop",
