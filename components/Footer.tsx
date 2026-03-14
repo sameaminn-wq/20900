@@ -60,7 +60,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-8 text-right">
         <div>
           <h3 className="text-white font-bold mb-3 text-xl tracking-tight">TastyRecipes</h3>
-          <p className="text-sm leading-relaxed">المصدر الأول للوصفات العربية المبتكرة والمجربة.</p>
+          <p className="text-sm leading-relaxed">اسرع مصدر  للوصفات العربية السريعة المبتكرة والمجربة.</p>
         </div>
 
         <div>
