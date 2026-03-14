@@ -1,5 +1,5 @@
 // app/articles/page.tsx
-import { articles } from ".//data/articles";
+import { articles } from "./data/articles";
 import Link from "next/link";
 
 export default function ArticlesPage() {
