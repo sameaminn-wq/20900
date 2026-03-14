@@ -1,6 +1,6 @@
 // ./app/recipes/[slug]/page.tsx
 import Image from "next/image";
-import { recipes } from "@/data/recipes"; // تأكد أن المسار صحيح
+import { recipes } from ".//data/recipes"; // تأكد أن المسار صحيح
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
