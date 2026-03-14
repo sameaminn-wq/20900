@@ -6,16 +6,10 @@ interface PageProps {
 }
 
 export default async function ArticlePage({ params }: PageProps) {
-  // 1. فك تشفير الـ params (ضروري في Next.js 15)
   const { slug } = await params;
-
-  // 2. البحث عن المقال داخل مصفوفة البيانات
   const article = articles.find((a) => a.slug === slug);
 
-  // 3. إذا لم يجد المقال (slug خطأ)، يظهر صفحة 404 تلقائياً
-  if (!article) {
-    return notFound();
-  }
+  if (!article) return notFound();
 
   return (
     <article className="max-w-4xl mx-auto px-4 py-10" dir="rtl">
@@ -31,14 +25,16 @@ export default async function ArticlePage({ params }: PageProps) {
         />
       </div>
 
-      <div className="prose prose-lg max-w-none text-slate-700 leading-loose">
+      <div className="prose prose-amber prose-lg max-w-none text-slate-700 leading-loose">
         <p className="font-medium text-xl text-amber-700 mb-6 italic">
           {article.description}
         </p>
-        {/* هنا يمكنك عرض محتوى المقال الكامل */}
-        <div className="whitespace-pre-wrap">
-           {article.content || "محتوى المقال سيظهر هنا..."}
-        </div>
+        
+        {/* التعديل هنا: استخدام dangerouslySetInnerHTML لعرض التنسيق بدلاً من الرموز */}
+        <div 
+          className="article-content"
+          dangerouslySetInnerHTML={{ __html: article.content || "" }} 
+        />
       </div>
     </article>
   );
