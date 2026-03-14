@@ -13,7 +13,7 @@ interface PageProps {
 
 // 1️⃣ توليد الميتا داتا (SEO)
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = params;
+  const slug = params.slug; // لا تستخدم await
   const recipe = recipes.find((r) => r.slug === slug);
 
   if (!recipe) return { title: "الوصفة غير موجودة" };
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 // 2️⃣ مكون الصفحة الرئيسي
 export default function RecipePage({ params }: PageProps) {
-  const { slug } = params;
+  const slug = params.slug; // لا تستخدم await
   const recipe = recipes.find((r) => r.slug === slug);
 
   if (!recipe) return notFound();
@@ -78,7 +78,7 @@ export default function RecipePage({ params }: PageProps) {
         {/* الخطوات */}
         <div className="md:col-span-2">
           <h2 className="text-2xl font-bold mb-6 text-slate-900 border-r-4 border-amber-500 pr-3">
-            طريقة !التحضير
+            طريقة التحضير
           </h2>
           <div className="space-y-8">
             {recipe.steps.map((step, index) => (
