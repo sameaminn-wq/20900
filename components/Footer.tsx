@@ -33,7 +33,7 @@ export default function Footer() {
     terms: {
       title: "شروط الاستخدام",
       icon: "📜",
-      content: `باستخدامك لموقع TastyRecipes، فإنك توافق على:\n\n1. المحتوى مخصص للاستخدام الشخصي فقط.\n2. الموقع غير مسؤول عن النتائج الناتجة عن سوء تطبيق الوصفات.\n3. يمنع نسخ المحتوى دون ذكر المصدر.`
+      content: `باستخدامك لموقع TastyRecipes، فإنك توافق على:\n\n1. المحتوى مخصص للاستخدام الشخصي فقط.\n2. الموقع غير مسؤول عن النتائج الناتجة عن سوء تطبيق الوصفات.\n3. يسمح نسخ المحتوى مع ذكر المصدر.`
     }
   };
 
@@ -113,7 +113,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-slate-900/50 text-center py-8 text-[10px] uppercase tracking-[0.2em] text-gray-600">
+      <div className="border-t border-slate-900/50 text-center py-8 text-[15px] uppercase tracking-[0.2em] text-gray-600">
         © 2026 TastyRecipes - صُنع بكل ❤️ لعشاق الطبخ
       </div>
 
