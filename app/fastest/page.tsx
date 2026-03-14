@@ -11,10 +11,10 @@ export default function Eid() {
       <header className="relative mb-12 text-center md:text-right overflow-hidden bg-orange-50 rounded-3xl p-8 md:p-12 border border-orange-100">
         <div className="relative z-10">
           <h1 className="text-3xl md:text-5xl font-black text-slate-900 mb-4">
-            وصفات <span className="text-orange-600">حلويات العيد</span>
+            وصفات <span className="text-orange-600"> الخاصة</span>
           </h1>
           <p className="text-slate-600 text-lg max-w-2xl leading-relaxed">
-            مجموعة مختارة من أشهى الحلويات الشرقية والمخبوزات التقليدية لتزين مائدتكم في عيد الفطر 2026.
+            مجموعة مختارة من أشهى الحلويات الشرقية والمخبوزات التقليدية لتزين مائدتكم في  في كل وقت 2026.
           </p>
         </div>
         
@@ -40,7 +40,7 @@ export default function Eid() {
       {/* تذييل بسيط للقسم */}
       <footer className="mt-16 text-center">
         <hr className="border-slate-100 mb-8" />
-        <p className="text-slate-400 text-sm italic">جميع الوصفات مجربة ومضمونة بنسبة 100%</p>
+        <p className="text-slate-400 text-sm italic">جميع الوصفات للتعليم فقط   %</p>
       </footer>
     </div>
   );
