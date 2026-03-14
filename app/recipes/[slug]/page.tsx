@@ -140,7 +140,7 @@ export default async function RecipePage({ params }: PageProps) {
               "name": "TastyRecipes"
             },
             "datePublished": "2026-03-14",
-            "description": `طريقة تحضير ${recipe.title} بخطوات!! سهلة ومقادير دقيقة ومجربة.`,
+            "description": `طريقة تحضير ${recipe.title} بخطوات! سهلة ومقادير دقيقة ومجربة.`,
             "prepTime": `PT${recipe.time}M`,
             "totalTime": `PT${recipe.time}M`,
             "recipeIngredient": recipe.ingredients,
