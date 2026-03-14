@@ -1,6 +1,6 @@
 // ./app/recipes/[slug]/page.tsx
 import Image from "next/image";
-import { recipes } from "@/data/recipes"; // تأكد أن المسار صحيح
+import { recipes } from ".//data/recipes"; // تأكد أن المسار صحيح
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 
@@ -13,7 +13,7 @@ interface PageProps {
 
 // 1️⃣ توليد الميتا داتا (SEO)
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = params;
+  const slug = params.slug; // لا تستخدم await
   const recipe = recipes.find((r) => r.slug === slug);
 
   if (!recipe) return { title: "الوصفة غير موجودة" };
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 // 2️⃣ مكون الصفحة الرئيسي
 export default function RecipePage({ params }: PageProps) {
-  const { slug } = params;
+  const slug = params.slug; // لا تستخدم await
   const recipe = recipes.find((r) => r.slug === slug);
 
   if (!recipe) return notFound();
