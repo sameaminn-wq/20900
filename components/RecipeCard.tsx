@@ -2,16 +2,19 @@ import Link from "next/link";
 // استيراد النوع من db
 import { Recipe } from "@/lib/db"; 
 
-// 1. تعريف واجهة محلية (Interface) تضمن وجود الخصائص المطلوبة لتجنب خطأ unknown
+// 1. تعريف واجهة محلية (Interface) تضمن وجود الخصائص المطلوبة
 interface RecipeCardProps {
   recipe: Recipe & {
-    rating?: number | string; // دمج الخاصية في حال لم تكن موجودة في النوع الأصلي
+    rating?: number | string; 
   }; 
 }
 
 export default function RecipeCard({ recipe }: RecipeCardProps) {
   return (
-    <Link href={`/recipe/${recipe.slug}`} className="group block h-full">
+    /* تم تعديل الرابط أدناه من /recipe/ إلى /recipes/ 
+       ليطابق اسم المجلد الموجود في الـ Explorer الخاص بك 
+    */
+    <Link href={`/recipes/${recipe.slug}`} className="group block h-full">
       <div className="bg-white border border-slate-100 rounded-[2rem] overflow-hidden transition-all duration-500 hover:shadow-[0_20px_50px_rgba(255,115,0,0.15)] hover:-translate-y-2 h-full flex flex-col">
         
         {/* حاوية الصورة */}
@@ -40,7 +43,6 @@ export default function RecipeCard({ recipe }: RecipeCardProps) {
             <div className="flex items-center gap-1 bg-yellow-50 px-3 py-1 rounded-lg">
               <span className="text-yellow-500 text-sm">⭐</span>
               <span className="text-yellow-700 font-bold text-sm">
-                {/* 2. التصحيح البرمجي: الوصول المباشر مع قيمة افتراضية */}
                 {recipe.rating ? String(recipe.rating) : "5.0"}
               </span>
             </div>
