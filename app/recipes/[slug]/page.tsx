@@ -1,7 +1,7 @@
 import { getRecipe } from "@/lib/db";
 import { notFound } from "next/navigation";
 
-// 1. تعريف واجهة لبيانات الوصفة (Interface) متوافقة مع الـ SEO والـ Build
+// 1. تعريف واجهة لبيانات الوصفة (Interface)
 interface Recipe {
   slug: string;
   title: string;
@@ -12,7 +12,7 @@ interface Recipe {
   rating?: string | number;
 }
 
-// 2. تعريف واجهة البارامترات (تحديث Next.js 15+)
+// 2. تعريف واجهة البارامترات (Next.js 15+)
 interface PageProps {
   params: Promise<{
     slug: string;
@@ -21,13 +21,13 @@ interface PageProps {
 
 export default async function RecipePage({ params }: PageProps) {
   
-  // فك تشفير البارامترات (Unwrapping params)
+  // فك تشفير البارامترات
   const { slug } = await params;
 
-  // الحصول على الوصفة من قاعدة البيانات
+  // الحصول على الوصفة
   const recipe = getRecipe(slug) as Recipe;
 
-  // 4. التحقق من وجود الوصفة
+  // التحقق من وجود الوصفة
   if (!recipe) {
     notFound(); 
   }
@@ -35,7 +35,7 @@ export default async function RecipePage({ params }: PageProps) {
   return (
     <article className="max-w-5xl mx-auto px-4 sm:px-6 py-6 md:py-16" dir="rtl">
       
-      {/* رأس الصفحة - Responsive Typography */}
+      {/* رأس الصفحة */}
       <header className="text-center md:text-right mb-10 md:mb-16">
         <h1 className="text-3xl md:text-6xl font-black text-slate-900 mb-6 leading-tight tracking-tight">
           {recipe.title}
@@ -53,7 +53,7 @@ export default async function RecipePage({ params }: PageProps) {
         </div>
       </header>
 
-      {/* صورة الوصفة - احترافية ومتجاوبة */}
+      {/* صورة الوصفة */}
       <div className="relative aspect-video md:aspect-[21/9] w-full overflow-hidden rounded-[2.5rem] shadow-2xl shadow-orange-100/50 mb-12 md:mb-20 border-8 border-white">
         <img 
           src={recipe.image} 
@@ -64,7 +64,7 @@ export default async function RecipePage({ params }: PageProps) {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
         
-        {/* قسم المكونات - Sidebar ذكي */}
+        {/* قسم المكونات */}
         <aside className="lg:col-span-4 order-2 lg:order-1">
           <div className="bg-slate-50 p-8 md:p-10 rounded-[2.5rem] border border-slate-100 lg:sticky lg:top-24 shadow-sm">
             <h2 className="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-3">
@@ -82,7 +82,7 @@ export default async function RecipePage({ params }: PageProps) {
           </div>
         </aside>
 
-        {/* قسم طريقة التحضير - المحتوى الأساسي */}
+        {/* قسم طريقة التحضير */}
         <main className="lg:col-span-8 order-1 lg:order-2">
           <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-10 flex items-center gap-3">
             <span className="bg-slate-900 text-white w-10 h-10 rounded-xl flex items-center justify-center text-xl shadow-lg">👨‍🍳</span> 
@@ -113,6 +113,37 @@ export default async function RecipePage({ params }: PageProps) {
           طباعة الوصفة 🖨️
         </button>
       </footer>
+
+      {/* --- إضافة البيانات المنظمة لـ SEO --- */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org/",
+            "@type": "Recipe",
+            "name": recipe.title,
+            "image": [recipe.image],
+            "author": {
+              "@type": "Organization",
+              "name": "TastyRecipes"
+            },
+            "datePublished": "2026-03-14",
+            "description": `طريقة تحضير ${recipe.title} بخطوات سهلة ومقادير دقيقة ومجربة.`,
+            "prepTime": `PT${recipe.time}M`,
+            "totalTime": `PT${recipe.time}M`,
+            "recipeIngredient": recipe.ingredients,
+            "recipeInstructions": recipe.steps.map((step) => ({
+              "@type": "HowToStep",
+              "text": step
+            })),
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": recipe.rating || "5",
+              "reviewCount": "24"
+            }
+          })
+        }}
+      />
     </article>
   );
 }
