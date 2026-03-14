@@ -4,21 +4,22 @@ import "./globals.css"
 import React from "react"
 import { Metadata } from 'next' 
 import { Analytics } from "@vercel/analytics/next"
-// 1. استيراد مكون Script من Next.js
 import Script from 'next/script'
+// استيراد المكون الرسمي لـ GTM من مكتبة Next.js الرسمية
+import { GoogleTagManager } from '@next/third-parties/google'
 
 /**
- * إعدادات الـ Metadata: تم دمج! كود تحقق جوجل بنجاح
+ * 1. إعدادات الـ Metadata: 
+ * تشمل عنوان الموقع وكود إثبات الملكية لجوجل (Search Console)
  */
 export const metadata: Metadata = {
+  title: "TastyRecipes - عالم الوصفات الشهية",
+  description: "اكتشف مئات الوصفات المجربة والمقالات الحصرية عن فن الطبخ",
   verification: {
     google: 'BJkbkAmhKK1kKtcmHmCXdnY37N9RqTIbWCidziUp8DE',
   },
 }
 
-/**
- * RootLayoutProps: تعريف الأنواع لضمان توافق تام مع TypeScript و React 18+
- */
 interface RootLayoutProps {
   children: React.ReactNode;
 }
@@ -26,27 +27,38 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="ar" dir="rtl" className="scroll-smooth">
+      
+      {/* 2. إضافة Google Tag Manager (GTM) 
+          يتم وضعه هنا ليعمل في أعلى الـ head والـ body تلقائياً
+          تأكد من استبدال GTM-XXXXXXX بالكود الخاص بك
+      */}
+      <GoogleTagManager gtmId="GTM-XXXXXXX" />
+
       <head>
-        {/* 2. دمج كود جوجل أدسينس الخاص بك هنا داخل الـ head */}
+        {/* 3. كود جوجل أدسينس (AdSense) 
+            موضع في الـ head مع استراتيجية عدم إبطاء الموقع
+        */}
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1757293962797494"
           crossOrigin="anonymous"
-          strategy="afterInteractive" // لضمان تحميله بعد تفاعل الصفحة ولعدم إبطاء التحميل الأولي
+          strategy="afterInteractive"
         />
       </head>
-      <body className="bg-slate-50 text-slate-900 antialiased selection:bg-orange-100 selection:text-orange-900">
+      
+      <body className="bg-slate-50 text-slate-900 antialiased selection:bg-orange-100 selection:text-orange-900 overflow-x-hidden">
         
-        {/* الهيكل التنظيمي للموقع */}
+        {/* الهيكل التنظيمي للموقع (Layout Structure) */}
         <div className="flex flex-col min-h-screen">
           
-          {/* شريط التنقل العلوي */}
+          {/* شريط التنقل العلوي الثابت */}
           <Navbar />
 
-          {/* المحتوى الرئيسي */}
-          <main className="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10 lg:py-12 transition-all duration-300">
+          {/* المحتوى الرئيسي للموقع */}
+          <main className="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10 lg:py-12">
             {children}
-            {/* 3. وضع مكون التحليلات داخل المحتوى ليعمل في كل الصفحات */}
+            
+            {/* 4. تحليلات Vercel لمراقبة الزوار لحظياً */}
             <Analytics />
           </main>
 
