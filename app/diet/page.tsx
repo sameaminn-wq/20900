@@ -1,14 +1,14 @@
-import { getCategory } from "@/lib/db";
+import { getCategory, Recipe } from "@/lib/db"; // استيراد النوع Recipe أيضاً
 import RecipeCard from "@/components/RecipeCard";
 
 export default function DietPage() {
-  // جلب وصفات الدايت فقط من قاعدة البيانات
-  const dietRecipes = getCategory("diet");
+  // جلب وصفات الدايت وتحديد نوعها كمصفوفة من الوصفات
+  const dietRecipes = getCategory("diet") as Recipe[];
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16" dir="rtl">
       
-      {/* رأس الصفحة - تصميم هادئ ومريح للعين (Healthy Vibes) */}
+      {/* رأس الصفحة */}
       <header className="relative mb-12 text-center md:text-right overflow-hidden bg-emerald-50 rounded-[2.5rem] p-10 md:p-16 border border-emerald-100">
         <div className="relative z-10">
           <span className="inline-block bg-emerald-200 text-emerald-800 text-xs font-bold px-4 py-1 rounded-full mb-4 uppercase tracking-widest">
@@ -22,7 +22,6 @@ export default function DietPage() {
           </p>
         </div>
         
-        {/* لمسة ديكور خضراء خلفية */}
         <div className="absolute -left-20 -bottom-20 w-64 h-64 bg-emerald-200/20 rounded-full blur-3xl"></div>
       </header>
 
@@ -43,10 +42,12 @@ export default function DietPage() {
         </div>
       )}
 
-      {/* نصيحة دايت سريعة في الأسفل */}
+      {/* نصيحة دايت سريعة - تم إصلاح علامات الاقتباس هنا */}
       <footer className="mt-20 p-8 bg-slate-900 rounded-3xl text-center text-white">
         <h3 className="text-xl font-bold mb-2">💡 نصيحة TastyRecipes اليوم</h3>
-        <p className="text-slate-400 italic">"الأكل الصحي ليس حرماناً، بل هو فن اختيار البدائل الأذكى لذات الطعم الرائع."</p>
+        <p className="text-slate-400 italic">
+          &quot;الأكل الصحي ليس حرماناً، بل هو فن اختيار البدائل الأذكى لذات الطعم الرائع.&quot;
+        </p>
       </footer>
     </div>
   );
