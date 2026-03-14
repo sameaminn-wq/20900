@@ -1,5 +1,6 @@
 import { getRecipe } from "@/lib/db";
 import { notFound } from "next/navigation";
+import Breadcrumbs from "@/components/Breadcrumbs"; // استيراد المكون الجديد
 
 // 1. تعريف واجهة لبيانات الوصفة (Interface)
 interface Recipe {
@@ -27,7 +28,7 @@ export default async function RecipePage({ params }: PageProps) {
   // الحصول على الوصفة
   const recipe = getRecipe(slug) as Recipe;
 
-  // التحقق من وجود الوصفة
+  // 4. التحقق من وجود الوصفة
   if (!recipe) {
     notFound(); 
   }
@@ -35,7 +36,10 @@ export default async function RecipePage({ params }: PageProps) {
   return (
     <article className="max-w-5xl mx-auto px-4 sm:px-6 py-6 md:py-16" dir="rtl">
       
-      {/* رأس الصفحة */}
+      {/* --- إضافة مسار التنقل هنا قبل رأس الصفحة --- */}
+      <Breadcrumbs title={recipe.title} />
+
+      {/* رأس الصفحة - Responsive Typography */}
       <header className="text-center md:text-right mb-10 md:mb-16">
         <h1 className="text-3xl md:text-6xl font-black text-slate-900 mb-6 leading-tight tracking-tight">
           {recipe.title}
@@ -53,7 +57,7 @@ export default async function RecipePage({ params }: PageProps) {
         </div>
       </header>
 
-      {/* صورة الوصفة */}
+      {/* صورة الوصفة - احترافية ومتجاوبة */}
       <div className="relative aspect-video md:aspect-[21/9] w-full overflow-hidden rounded-[2.5rem] shadow-2xl shadow-orange-100/50 mb-12 md:mb-20 border-8 border-white">
         <img 
           src={recipe.image} 
@@ -64,7 +68,7 @@ export default async function RecipePage({ params }: PageProps) {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
         
-        {/* قسم المكونات */}
+        {/* قسم المكونات - Sidebar ذكي */}
         <aside className="lg:col-span-4 order-2 lg:order-1">
           <div className="bg-slate-50 p-8 md:p-10 rounded-[2.5rem] border border-slate-100 lg:sticky lg:top-24 shadow-sm">
             <h2 className="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-3">
@@ -82,7 +86,7 @@ export default async function RecipePage({ params }: PageProps) {
           </div>
         </aside>
 
-        {/* قسم طريقة التحضير */}
+        {/* قسم طريقة التحضير - المحتوى الأساسي */}
         <main className="lg:col-span-8 order-1 lg:order-2">
           <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-10 flex items-center gap-3">
             <span className="bg-slate-900 text-white w-10 h-10 rounded-xl flex items-center justify-center text-xl shadow-lg">👨‍🍳</span> 
@@ -132,7 +136,7 @@ export default async function RecipePage({ params }: PageProps) {
             "prepTime": `PT${recipe.time}M`,
             "totalTime": `PT${recipe.time}M`,
             "recipeIngredient": recipe.ingredients,
-            "recipeInstructions": recipe.steps.map((step) => ({
+            "recipeInstructions": recipe.steps.map((step: any) => ({
               "@type": "HowToStep",
               "text": step
             })),
