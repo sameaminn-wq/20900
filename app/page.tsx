@@ -15,18 +15,34 @@ export default function Home() {
       
       {/* قسم الترحيب والبحث - Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-orange-500 to-amber-600 text-white rounded-[2rem] p-8 md:p-16 mb-12 shadow-xl shadow-orange-200">
-        <div className="relative z-10 max-w-2xl text-center md:text-right">
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-black mb-6 leading-tight">
-            أفضل وصفات الطبخ <br/> 
-            <span className="text-orange-100 text-2xl sm:text-3xl font-medium">بين يديك الآن</span>
-          </h1>
-          <p className="text-orange-50 text-sm sm:text-base mb-8 opacity-90">
-            اكتشف مئات الوصفات الشهية والمجربة من أشهر المطابخ العربية والعالمية.
-          </p>
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 items-center gap-10">
           
-          {/* مكون شريط البحث */}
-          <div className="max-w-md">
-            <SearchBar />
+          {/* النصوص وصندوق البحث */}
+          <div className="text-center md:text-right">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-black mb-6 leading-tight">
+              أفضل وصفات الطبخ <br/> 
+              <span className="text-orange-100 text-2xl sm:text-3xl font-medium">بين يديك الآن</span>
+            </h1>
+            <p className="text-orange-50 text-sm sm:text-base mb-8 opacity-90 max-w-lg">
+              اكتشف مئات الوصفات الشهية والمجربة من أشهر المطابخ العربية والعالمية. ابدأ رحلتك في عالم الطهي الاحترافي اليوم.
+            </p>
+            
+            <div className="max-w-md mx-auto md:mx-0">
+              <SearchBar />
+            </div>
+          </div>
+
+          {/* الصورة المضافة - الوجبة الشهية */}
+          <div className="hidden lg:block relative group">
+            <div className="relative w-full aspect-square max-w-[400px] mr-auto overflow-hidden rounded-[2.5rem] border-8 border-white/20 shadow-2xl rotate-3 group-hover:rotate-0 transition-transform duration-500">
+              <img 
+                src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800&auto=format&fit=crop" 
+                alt="طبق شهي ومميز" 
+                className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-700"
+              />
+            </div>
+            {/* لمسة جمالية خلف الصورة */}
+            <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-amber-400 rounded-full blur-2xl opacity-50"></div>
           </div>
         </div>
 
@@ -37,28 +53,18 @@ export default function Home() {
 
       {/* شبكة عرض الوصفات - Grid System */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
-        {/* التحقق من البيانات قبل المعالجة:
-            1. recipes && : للتأكد أن المتغير ليس null.
-            2. recipes.length > 0 : للتأكد أن المصفوفة ليست فارغة.
-        */}
         {recipes && recipes.length > 0 ? (
           recipes
-            /* تصفية البيانات (Filtering): 
-               نقوم باستبعاد أي عنصر قد يكون undefined أو يفتقد لخاصية slug
-               لتجنب خطأ "Cannot read properties of undefined"
-            */
             .filter((recipe) => recipe && recipe.slug)
             .map((recipe) => (
               <div 
                 key={recipe.slug} 
                 className="transform transition-all duration-300 hover:-translate-y-2"
               >
-                {/* عرض بطاقة الوصفة */}
                 <RecipeCard recipe={recipe} />
               </div>
             ))
         ) : (
-          /* حالة عدم وجود بيانات متوفرة */
           <div className="col-span-full py-24 text-center bg-slate-50 rounded-[3rem] border-2 border-dashed border-slate-200">
             <div className="text-5xl mb-4">👨‍🍳</div>
             <h3 className="text-xl font-bold text-slate-800 mb-2">لا توجد وصفات حالياً</h3>
