@@ -5,11 +5,11 @@ export default function Footer() {
   const [activeModal, setActiveModal] = useState(null);
   const [showCookieBanner, setShowCookieBanner] = useState(false);
 
+  // التأكد من حالة الموافقة على الكوكيز عند تحميل الصفحة
   useEffect(() => {
     const consent = localStorage.getItem('tasty-cookies-consent');
     if (!consent) {
-      const timer = setTimeout(() => setShowCookieBanner(true), 2000);
-      return () => clearTimeout(timer);
+      setShowCookieBanner(true);
     }
   }, []);
 
@@ -18,129 +18,92 @@ export default function Footer() {
     setShowCookieBanner(false);
   };
 
+  const toggleModal = (type) => setActiveModal(type);
+
   const policies = {
     privacy: {
       title: "سياسة الخصوصية والكوكيز",
-      content: `نحن في TastyRecipes نلتزم بأقصى معايير الخصوصية:\n\n• نستخدم الكوكيز لتحسين أداء الموقع وتحليل حركة الزوار.\n• نستخدم Google AdSense لعرض إعلانات مخصصة تهمك.\n• بياناتك الشخصية (مثل البريد الإلكتروني) لا تُشارك مع أي طرف ثالث تحت أي ظرف.\n• باستمرارك في التصفح، أنت توافق على معالجة البيانات بما يخدم تجربتك.`
+      content: `نحن في TastyRecipes نستخدم ملفات تعريف الارتباط (Cookies) لتحسين تجربتك. 
+      - نستخدم الكوكيز لتذكر تفضيلاتك وتقديم محتوى مخصص.
+      - نستخدم خدمات طرف ثالث مثل Google AdSense لعرض الإعلانات التي قد تستخدم الكوكيز لجمع بيانات غير شخصية.
+      - يمكنك دائماً تعطيل الكوكيز من إعدادات متصفحك.`
     },
     terms: {
       title: "شروط الاستخدام",
-      content: `1. المحتوى مخصص للاستخدام الشخصي غير التجاري.\n2. يُمنع إعادة نشر الوصفات أو الصور دون الحصول على إذن مسبق.\n3. يتم تحديث الشروط دورياً لضمان أفضل حماية للمستخدم والموقع.\n4. نلتزم بتقديم معلومات دقيقة، ولكن لا نتحمل مسؤولية أي تطبيق خاطئ للوصفات.`
+      content: `باستخدامك لموقع TastyRecipes، فإنك توافق على الالتزام بالشروط الآتية:
+      1. المحتوى مخصص للاستخدام الشخصي فقط.
+      2. يُمنع نسخ أو إعادة توزيع الوصفات دون ذكر المصدر.
+      3. الموقع غير مسؤول عن النتائج الناتجة عن سوء تطبيق الوصفات.`
     }
   };
 
   return (
-    <footer className="relative bg-[#020617] text-slate-400 mt-20 border-t border-slate-900" dir="rtl">
+    <footer className="relative bg-slate-950 text-gray-400 mt-20 dir-rtl" dir="rtl">
       
-      {/* 1. بنر الكوكيز - تصميم عائم وجذاب */}
+      {/* شريط الكوكيز - يظهر في الأسفل إذا لم يوافق المستخدم بعد */}
       {showCookieBanner && (
-        <div className="fixed bottom-4 left-4 right-4 md:left-8 md:right-auto md:max-w-md bg-slate-900/90 backdrop-blur-xl border border-white/10 p-6 z-[100] rounded-2xl shadow-2xl animate-in slide-in-from-bottom-10 duration-500">
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <span className="text-2xl">🍪</span>
-              <h4 className="text-white font-bold">خصوصيتك تهمنا</h4>
-            </div>
-            <p className="text-sm leading-relaxed">
-              نحن نستخدم ملفات تعريف الارتباط لضمان حصولك على أفضل تجربة طهي.
-              <button onClick={() => setActiveModal('privacy')} className="text-orange-500 hover:text-orange-400 font-medium mx-1 underline underline-offset-4">التفاصيل</button>
+        <div className="fixed bottom-0 left-0 right-0 bg-slate-900 border-t border-orange-500/30 p-4 z-[100] animate-bounce-in shadow-2xl">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-gray-200 text-center md:text-right">
+              نحن نستخدم ملفات تعريف الارتباط لنقدم لك أفضل تجربة. استمرارك في التصفح يعني موافقتك على ذلك. 
+              <button onClick={() => toggleModal('privacy')} className="underline mr-2 hover:text-orange-400">اقرأ المزيد</button>
             </p>
             <button 
               onClick={handleCookieAccept}
-              className="w-full bg-orange-600 hover:bg-orange-700 text-white py-2.5 rounded-xl font-bold transition-all active:scale-95 shadow-lg shadow-orange-600/20"
+              className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-2 rounded-full font-bold transition-all transform hover:scale-105"
             >
-              موافق، ابدأ الطهي!
+              موافق
             </button>
           </div>
         </div>
       )}
 
-      {/* 2. محتوى الفوتر الأساسي */}
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
-          
-          {/* قسم الموقع */}
-          <div className="md:col-span-5 space-y-4 text-center md:text-right">
-            <h2 className="text-3xl font-black text-white bg-gradient-to-l from-orange-500 to-amber-200 bg-clip-text text-transparent">
-              TastyRecipes
-            </h2>
-            <p className="max-w-md mx-auto md:mx-0 text-slate-300 leading-relaxed">
-              وجهتكم الموثوقة لاستكشاف عالم الطهي بكل حب. نقدم لكم وصفات مختارة بعناية لتناسب جميع الأذواق والمناسبات.
-            </p>
-          </div>
-
-          {/* قسم الروابط */}
-          <div className="md:col-span-3 flex flex-col items-center md:items-start">
-            <h4 className="text-white font-bold mb-6 relative after:content-[''] after:absolute after:-bottom-2 after:right-0 after:w-8 after:h-1 after:bg-orange-600 after:rounded-full">
-              قانونيـات
-            </h4>
-            <ul className="space-y-4 text-center md:text-right">
-              <li><button onClick={() => setActiveModal('privacy')} className="hover:text-white transition-colors">سياسة الخصوصية</button></li>
-              <li><button onClick={() => setActiveModal('terms')} className="hover:text-white transition-colors">شروط الاستخدام</button></li>
-              <li><a href="#" className="hover:text-white transition-colors">اتصل بنا</a></li>
-            </ul>
-          </div>
-
-          {/* قسم التواصل */}
-          <div className="md:col-span-4 flex flex-col items-center md:items-start">
-            <h4 className="text-white font-bold mb-6">تابعوا رحلتنا</h4>
-            <div className="flex gap-4">
-              {['FB', 'IG', 'YT', 'TW'].map((social) => (
-                <div key={social} className="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-xs font-bold hover:bg-orange-600 hover:text-white hover:-translate-y-1 transition-all cursor-pointer">
-                  {social}
-                </div>
-              ))}
-            </div>
-          </div>
+      <div className="max-w-7xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-8 text-right">
+        <div>
+          <h3 className="text-white font-bold mb-3 text-xl tracking-tight">TastyRecipes</h3>
+          <p className="text-sm leading-relaxed">المصدر الأول للوصفات العربية المبتكرة والمجربة.</p>
         </div>
 
-        {/* حقوق النشر */}
-        <div className="mt-16 pt-8 border-t border-slate-900/50 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
-          <p>© 2026 TastyRecipes. جميع الحقوق محفوظة.</p>
-          <p className="flex items-center gap-1">
-            صُنع بـ <span className="text-red-500 animate-pulse">❤️</span> في مصر
-          </p>
+        <div>
+          <h4 className="text-white mb-4 font-semibold">المعلومات القانونية</h4>
+          <ul className="space-y-3">
+            <li>
+              <button onClick={() => toggleModal('privacy')} className="hover:text-orange-400 transition-colors">
+                سياسة الخصوصية والكوكيز
+              </button>
+            </li>
+            <li>
+              <button onClick={() => toggleModal('terms')} className="hover:text-orange-400 transition-colors">
+                شروط الاستخدام
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
 
-      {/* 3. نافذة السياسات (Modal) - احترافية بالكامل */}
-      {activeModal && (
-        <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 z-[110] animate-in fade-in duration-300">
-          <div className="bg-[#0f172a] border border-slate-800 p-8 md:p-12 rounded-[2.5rem] max-w-2xl w-full shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden">
-            
-            {/* زر الإغلاق العلوي */}
-            <button 
-              onClick={() => setActiveModal(null)}
-              className="absolute top-6 left-6 w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-white hover:bg-orange-600 transition-colors"
-            >
-              ✕
-            </button>
+      <div className="border-t border-slate-900 text-center py-6 text-xs text-gray-500">
+        © 2026 TastyRecipes - جميع الحقوق محفوظة
+      </div>
 
-            <h3 className="text-2xl md:text-3xl text-white font-bold mb-8 text-center">
+      {/* مودال السياسات */}
+      {activeModal && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 z-[110]">
+          <div className="bg-slate-900 border border-slate-800 p-8 rounded-3xl max-w-lg w-full shadow-2xl overflow-y-auto max-h-[80vh]">
+            <h3 className="text-2xl text-white font-bold mb-4 border-b border-orange-500/20 pb-4 text-center">
               {policies[activeModal].title}
             </h3>
-
-            <div className="max-h-[50vh] overflow-y-auto custom-scrollbar pl-4 text-right">
-              <p className="text-slate-300 leading-loose text-lg whitespace-pre-line">
-                {policies[activeModal].content}
-              </p>
-            </div>
-
+            <p className="text-gray-300 leading-loose text-base text-right whitespace-pre-line">
+              {policies[activeModal].content}
+            </p>
             <button 
               onClick={() => setActiveModal(null)}
-              className="mt-10 w-full bg-slate-800 hover:bg-slate-700 text-white py-4 rounded-2xl font-bold transition-all"
+              className="mt-8 w-full bg-slate-800 text-white py-3 rounded-xl hover:bg-slate-700 transition-all font-semibold"
             >
-              إغلاق النافذة
+              إغلاق
             </button>
           </div>
         </div>
       )}
-
-      <style jsx>{`
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #ea580c; }
-      `}</style>
     </footer>
   );
 }
