@@ -5,17 +5,18 @@ import React from "react"
 import { Metadata } from 'next' 
 import { Analytics } from "@vercel/analytics/next"
 import Script from 'next/script'
-// استيراد المكون الرسمي لـ GTM من مكتبة Next.js الرسمية
-import { GoogleTagManager } from '@next/third-parties/google'
+// استيراد المكونات الرسمية لضمان عدم وجود أخطاء في الـ Build
+import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google'
 
 /**
- * 1. إعدادات الـ Metadata: 
- * تشمل عنوان الموقع وكود إثبات الملكية لجوجل (Search Console)
+ * 1. إعدادات الـ Metadata:
+ * هذا الجزء هو المسؤول عن إثبات ملكية الموقع في Search Console.
  */
 export const metadata: Metadata = {
   title: "TastyRecipes - عالم الوصفات الشهية",
   description: "اكتشف مئات الوصفات المجربة والمقالات الحصرية عن فن الطبخ",
   verification: {
+    // كود التحقق الخاص بك (لا تلمسه)
     google: 'BJkbkAmhKK1kKtcmHmCXdnY37N9RqTIbWCidziUp8DE',
   },
 }
@@ -28,16 +29,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="ar" dir="rtl" className="scroll-smooth">
       
-      {/* 2. إضافة Google Tag Manager (GTM) 
-          يتم وضعه هنا ليعمل في أعلى الـ head والـ body تلقائياً
-          تأكد من استبدال GTM-XXXXXXX بالكود الخاص بك
-      */}
+      {/* 2. أدوات تتبع جوجل (توضع في الـ Head تلقائياً عبر Next.js) */}
+      {/* استبدل GTM-XXXXXXX و G-XXXXXXXXXX بالأكواد الخاصة بك من حسابات جوجل */}
       <GoogleTagManager gtmId="GTM-XXXXXXX" />
+      <GoogleAnalytics gaId="G-XXXXXXXXXX" />
 
       <head>
-        {/* 3. كود جوجل أدسينس (AdSense) 
-            موضع في الـ head مع استراتيجية عدم إبطاء الموقع
-        */}
+        {/* 3. كود جوجل أدسينس (Google AdSense) */}
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1757293962797494"
@@ -48,21 +46,21 @@ export default function RootLayout({ children }: RootLayoutProps) {
       
       <body className="bg-slate-50 text-slate-900 antialiased selection:bg-orange-100 selection:text-orange-900 overflow-x-hidden">
         
-        {/* الهيكل التنظيمي للموقع (Layout Structure) */}
+        {/* الهيكل العام للموقع */}
         <div className="flex flex-col min-h-screen">
           
-          {/* شريط التنقل العلوي الثابت */}
+          {/* شريط التنقل (النيفبار) */}
           <Navbar />
 
-          {/* المحتوى الرئيسي للموقع */}
-          <main className="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10 lg:py-12">
+          {/* المحتوى الرئيسي */}
+          <main className="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10 lg:py-12 transition-all duration-300">
             {children}
             
-            {/* 4. تحليلات Vercel لمراقبة الزوار لحظياً */}
+            {/* 4. تحليلات Vercel لمراقبة الأداء والزوار */}
             <Analytics />
           </main>
 
-          {/* تذييل الصفحة */}
+          {/* تذييل الصفحة (الفوتر) */}
           <Footer />
           
         </div>
