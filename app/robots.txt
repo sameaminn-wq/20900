@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/private/', // أي جلد لا تريد أرشفته
     },
-    sitemap: 'https://tastyrecipes.vercel.app/sitemap.xml', // رابط السايت ماب الخاص بك
+    sitemap: 'https://tastyrecipess.vercel.app/sitemap.xml', // رابط السايت ماب الخاص بك
   };
 }
