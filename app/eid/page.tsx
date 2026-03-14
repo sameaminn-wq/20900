@@ -40,7 +40,7 @@ export default function Eid() {
       {/* تذييل بسيط للقسم */}
       <footer className="mt-16 text-center">
         <hr className="border-slate-100 mb-8" />
-        <p className="text-slate-400 text-sm italic">جميع الوصفات مجربة ومضمونة بنسبة 100%</p>
+        <p className="text-slate-400 text-sm italic">جميع الوصفات للتعليم فقط  والمنصة عير مسؤول عن اي سوء استخدام !%</p>
       </footer>
     </div>
   );
