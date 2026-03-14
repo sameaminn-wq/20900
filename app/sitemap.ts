@@ -1,22 +1,24 @@
 import { MetadataRoute } from 'next';
-import { recipes } from '@/data/recipes'; // استيراد الوصفات لجعل الروابط ديناميكية
+import { recipes } from '@/data/recipes';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://tasty-recipes.vercel.app"; // استبدله برابط موقعك الحقيقي
+  // نصيحة: تأكد 100% أن هذا الرابط هو نفس الرابط الذي تفتحه في المتصفح بالضبط
+  const baseUrl = "https://tastyrecipes.vercel.app"; 
 
-  // 1. تعريف الروابط الثابتة (Static Routes)
-  const staticRoutes = ["", "/categories", "/diet", "/articles", "/eid"].map((route) => ({
+  // 1. تعريف الروابط الثابتة
+  // ملاحظة: تأكد أن مجلد الـ categories موجود فعلياً في ملفاتك، إذا لم يكن موجوداً احذفه من المصفوفة
+  const staticRoutes: MetadataRoute.Sitemap = ["", "/diet", "/articles", "/eid"].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: route === "" ? 1 : 0.8, // الصفحة الرئيسية لها الأولوية القصوى
+    changeFrequency: 'weekly',
+    priority: route === "" ? 1 : 0.8,
   }));
 
-  // 2. إنشاء روابط الوصفات تلقائياً (Dynamic Routes)
-  const recipeRoutes = recipes.map((recipe) => ({
+  // 2. إنشاء روابط الوصفات تلقائياً
+  const recipeRoutes: MetadataRoute.Sitemap = recipes.map((recipe) => ({
     url: `${baseUrl}/recipes/${recipe.slug}`,
     lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
+    changeFrequency: 'monthly',
     priority: 0.6,
   }));
 

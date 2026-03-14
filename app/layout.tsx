@@ -7,7 +7,7 @@ import { Metadata } from 'next'
 import { Analytics } from "@vercel/analytics/next"
 
 /**
- * إعدادات الـ Metadata: ت إضافة كود تحقق جوجل فقط
+ * إعدادات الـ Metadata: تم دمج كود تحقق جوجل بنجاح
  */
 export const metadata: Metadata = {
   verification: {
