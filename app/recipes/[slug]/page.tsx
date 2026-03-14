@@ -1,7 +1,8 @@
 import { getRecipe } from "@/lib/db";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import ShareButtons from "@/components/ShareButtons"; // 1. استيراد أزرار المشاركة
+import ShareButtons from "@/components/ShareButtons";
+import RelatedRecipes from "@/components/RelatedRecipes"; // استيراد المكون الجديد
 
 // 1. تعريف واجهة لبيانات الوصفة (Interface)
 interface Recipe {
@@ -111,8 +112,11 @@ export default async function RecipePage({ params }: PageProps) {
 
       </div>
 
-      {/* 2. إضافة أزرار المشاركة هنا */}
+      {/* أزرار المشاركة */}
       <ShareButtons title={recipe.title} />
+
+      {/* إضافة قسم الوصفات ذات الصلة هنا */}
+      <RelatedRecipes currentSlug={recipe.slug} />
       
       {/* تذييل الوصفة */}
       <footer className="mt-20 pt-10 border-t border-slate-100 flex flex-col md:flex-row items-center justify-between gap-6">
