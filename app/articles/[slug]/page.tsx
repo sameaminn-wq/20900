@@ -78,7 +78,7 @@ export default function RecipePage({ params }: PageProps) {
         {/* الخطوات */}
         <div className="md:col-span-2">
           <h2 className="text-2xl font-bold mb-6 text-slate-900 border-r-4 border-amber-500 pr-3">
-            طريقة التحضير
+            طريقة !التحضير
           </h2>
           <div className="space-y-8">
             {recipe.steps.map((step, index) => (
