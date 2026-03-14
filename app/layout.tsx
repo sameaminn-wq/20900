@@ -3,11 +3,12 @@ import Footer from "@/components/Footer"
 import "./globals.css"
 import React from "react"
 import { Metadata } from 'next' 
-// 1. استيراد Analytics من Vercel
 import { Analytics } from "@vercel/analytics/next"
+// 1. استيراد مكون Script من Next.js
+import Script from 'next/script'
 
 /**
- * إعدادات الـ Metadata: تم دمج كود تحقق جوجل بنجاح
+ * إعدادات الـ Metadata: تم دمج! كود تحقق جوجل بنجاح
  */
 export const metadata: Metadata = {
   verification: {
@@ -25,6 +26,15 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="ar" dir="rtl" className="scroll-smooth">
+      <head>
+        {/* 2. دمج كود جوجل أدسينس الخاص بك هنا داخل الـ head */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1757293962797494"
+          crossOrigin="anonymous"
+          strategy="afterInteractive" // لضمان تحميله بعد تفاعل الصفحة ولعدم إبطاء التحميل الأولي
+        />
+      </head>
       <body className="bg-slate-50 text-slate-900 antialiased selection:bg-orange-100 selection:text-orange-900">
         
         {/* الهيكل التنظيمي للموقع */}
@@ -36,7 +46,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           {/* المحتوى الرئيسي */}
           <main className="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10 lg:py-12 transition-all duration-300">
             {children}
-            {/* 2. وضع مكون التحليلات داخل المحتوى ليعمل في كل الصفحات */}
+            {/* 3. وضع مكون التحليلات داخل المحتوى ليعمل في كل الصفحات */}
             <Analytics />
           </main>
 
