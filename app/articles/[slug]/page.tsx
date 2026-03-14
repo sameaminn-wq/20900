@@ -1,97 +1,64 @@
-// ./app/recipes/[slug]/page.tsx
-import Image from "next/image";
-import { recipes } from "@/data/recipes"; // تأكد أن المسار صحيح
+import { articles } from "@/data/articles";
 import { notFound } from "next/navigation";
-import { Metadata } from "next";
 
-// ✅ تعريف الأنواع بشكل صحيح
 interface PageProps {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 }
 
-// 1️⃣ توليد الميتا داتا (SEO)
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = params;
-  const recipe = recipes.find((r) => r.slug === slug);
+export default async function ArticlePage({ params }: PageProps) {
+  const { slug } = await params;
+  const article = articles.find((a) => a.slug === slug);
 
-  if (!recipe) return { title: "الوصفة غير موجودة" };
-
-  return {
-    title: `${recipe.title} | TastyRecipes`,
-    description: `تعلمي طريقة عمل ${recipe.title} الأصلية بخطوات سهلة ومقادير دقيقة.`,
-  };
-}
-
-// 2️⃣ مكون الصفحة الرئيسي
-export default function RecipePage({ params }: PageProps) {
-  const { slug } = params;
-  const recipe = recipes.find((r) => r.slug === slug);
-
-  if (!recipe) return notFound();
+  if (!article) return notFound();
 
   return (
-    <article className="max-w-4xl mx-auto px-4 py-10" dir="rtl">
-      {/* رأس الوصفة */}
-      <div className="text-center mb-10">
-        <span className="text-amber-600 font-bold text-sm uppercase tracking-widest">
-          {recipe.category}
-        </span>
-        <h1 className="text-4xl md:text-5xl font-black text-slate-900 mt-4 mb-6">
-          {recipe.title}
+    <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-12" dir="rtl">
+      
+      {/* رأس المقال - الهيدر */}
+      <header className="text-center mb-8 md:mb-12">
+        <h1 className="text-2xl sm:text-3xl md:text-5xl font-black text-slate-900 leading-tight mb-4">
+          {article.title}
         </h1>
-        <div className="flex justify-center gap-6 text-slate-500 font-medium">
-          <span>⏱️ {recipe.time} دقيقة</span>
-          <span>⭐ {recipe.rating}</span>
+        <div className="flex justify-center items-center gap-2 text-slate-500 text-sm">
+          <span className="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-xs font-bold">وصفة مختارة</span>
+          <span>•</span>
+          <time>2026</time>
         </div>
-      </div>
+      </header>
 
-      {/* صورة الوصفة باستخدام next/image */}
-      <div className="relative aspect-video w-full mb-12 rounded-[2rem] overflow-hidden shadow-2xl">
-        <Image
-          src={recipe.image}
-          alt={recipe.title}
-          fill
-          style={{ objectFit: "cover" }}
-          className="rounded-[2rem]"
-          priority
+      {/* صورة المقال - متجاوبة بذكاء */}
+      <div className="relative aspect-[16/9] md:aspect-[21/9] rounded-2xl md:rounded-[2.5rem] overflow-hidden mb-8 md:mb-12 shadow-2xl shadow-slate-200">
+        <img 
+          src={article.image} 
+          alt={article.title}
+          className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
         />
       </div>
 
-      <div className="grid md:grid-cols-3 gap-12">
-        {/* المكونات */}
-        <div className="md:col-span-1">
-          <h2 className="text-2xl font-bold mb-6 text-slate-900 border-r-4 border-amber-500 pr-3">
-            المكونات
-          </h2>
-          <ul className="space-y-4 text-slate-700">
-            {recipe.ingredients.map((ing, index) => (
-              <li key={index} className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-amber-500 rounded-full" />
-                {ing}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* الخطوات */}
-        <div className="md:col-span-2">
-          <h2 className="text-2xl font-bold mb-6 text-slate-900 border-r-4 border-amber-500 pr-3">
-            طريقة التحضير
-          </h2>
-          <div className="space-y-8">
-            {recipe.steps.map((step, index) => (
-              <div key={index} className="flex gap-4">
-                <div className="flex-shrink-0 w-8 h-8 bg-slate-900 text-white rounded-full flex items-center justify-center font-bold">
-                  {index + 1}
-                </div>
-                <p className="text-slate-700 leading-loose text-lg">{step}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+      {/* محتوى المقال */}
+      <div className="max-w-3xl mx-auto">
+        {/* الوصف المختصر */}
+        <p className="font-bold text-lg md:text-2xl text-amber-800 mb-8 leading-relaxed border-r-4 border-amber-500 pr-4 bg-amber-50/50 py-4 rounded-l-xl">
+          {article.description}
+        </p>
+        
+        {/* المحتوى التفصيلي */}
+        <div 
+          className="article-content prose prose-slate prose-lg md:prose-xl max-w-none 
+          prose-headings:text-slate-900 prose-headings:font-bold
+          prose-p:text-slate-700 prose-p:leading-extra-loose
+          prose-img:rounded-2xl prose-strong:text-amber-700
+          text-right"
+          dangerouslySetInnerHTML={{ __html: article.content || "" }} 
+        />
       </div>
+
+      {/* تذييل المقال (اختياري) */}
+      <footer className="mt-12 pt-8 border-t border-slate-100 text-center">
+        <button className="bg-slate-900 text-white px-8 py-3 rounded-full hover:bg-orange-600 transition-colors font-bold">
+          مشاركة الوصفة
+        </button>
+      </footer>
     </article>
   );
 }

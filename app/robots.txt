@@ -1,0 +1,12 @@
+import { MetadataRoute } from 'next';
+
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: {
+      userAgent: '*',
+      allow: '/',
+      disallow: '/private/', // أي جلد لا تريد أرشفته
+    },
+    sitemap: 'https://tastyrecipess.vercel.app/sitemap.xml', // رابط السايت ماب الخاص بك
+  };
+}

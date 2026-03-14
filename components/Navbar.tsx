@@ -15,16 +15,18 @@ export default function Navbar() {
         
         {/* الشعار - Logo */}
         <Link href="/" className="font-black text-2xl tracking-tighter text-amber-500" onClick={closeMenu}>
-          TastyRecipes
+          TastyRecipess
         </Link>
 
         {/* القائمة لمتصفحات الكمبيوتر - Desktop Menu */}
-        <nav className="hidden md:flex gap-8 text-sm font-bold">
+        <nav className="hidden md:flex gap-6 lg:gap-8 text-sm font-bold">
           <Link href="/" className="hover:text-amber-400 transition-colors">الرئيسية</Link>
           <Link href="/recipes" className="hover:text-amber-400 transition-colors">الوصفات</Link>
-          <Link href="/fastest" className="hover:text-amber-400 transition-colors">أسرع وصفات</Link>
+          <Link href="/fastest" className="hover:text-amber-400 transition-colors">أسرع ولا وصفات</Link>
           <Link href="/eid" className="hover:text-amber-400 transition-colors">وصفات العيد</Link>
-          <Link href="/articles" className="hover:text-amber-400 transition-colors">نصائح المطبخ</Link>
+          {/* تم إضافة قسم الدايت هنا */}
+          <Link href="/diet" className="text-green-400 hover:text-green-300 transition-colors">قسم الدايت 🥗</Link>
+          <Link href="/articles" className="hover:text-amber-400 transition-colors whitespace-nowrap">أفضل مقالات العيد</Link>
         </nav>
 
         {/* زر الموبايل - Mobile Menu Button */}
@@ -61,9 +63,11 @@ export default function Navbar() {
         <nav className="flex flex-col items-center gap-8 pt-10 text-xl font-bold">
           <Link href="/" onClick={closeMenu} className="hover:text-amber-400">الرئيسية</Link>
           <Link href="/recipes" onClick={closeMenu} className="hover:text-amber-400">الوصفات</Link>
-          <Link href="/fastest" onClick={closeMenu} className="hover:text-amber-400">أسرع وصفات</Link>
+          <Link href="/fastest" onClick={closeMenu} className="hover:text-amber-400">أسرع ولا وصفات</Link>
           <Link href="/eid" onClick={closeMenu} className="hover:text-amber-400">وصفات العيد</Link>
-          <Link href="/articles" onClick={closeMenu} className="hover:text-amber-400">نصائح المطبخ</Link>
+          {/* قسم الدايت للموبايل */}
+          <Link href="/diet" onClick={closeMenu} className="text-green-400 hover:text-green-300">قسم الدايت 🥗</Link>
+          <Link href="/articles" onClick={closeMenu} className="hover:text-amber-400">أفضل مقالات العيد</Link>
         </nav>
       </div>
     </header>
