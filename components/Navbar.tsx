@@ -63,7 +63,7 @@ export default function Navbar() {
         <nav className="flex flex-col items-center gap-8 pt-10 text-xl font-bold">
           <Link href="/" onClick={closeMenu} className="hover:text-amber-400">الرئيسية</Link>
           <Link href="/recipes" onClick={closeMenu} className="hover:text-amber-400">الوصفات</Link>
-          <Link href="/fastest" onClick={closeMenu} className="hover:text-amber-400">أسرع وصفات</Link>
+          <Link href="/fastest" onClick={closeMenu} className="hover:text-amber-400">أسرع ولا وصفات</Link>
           <Link href="/eid" onClick={closeMenu} className="hover:text-amber-400">وصفات العيد</Link>
           {/* قسم الدايت للموبايل */}
           <Link href="/diet" onClick={closeMenu} className="text-green-400 hover:text-green-300">قسم الدايت 🥗</Link>
