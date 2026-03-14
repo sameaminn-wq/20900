@@ -24,7 +24,7 @@ export default function Navbar() {
           <Link href="/recipes" className="hover:text-amber-400 transition-colors">الوصفات</Link>
           <Link href="/fastest" className="hover:text-amber-400 transition-colors">أسرع وصفات</Link>
           <Link href="/eid" className="hover:text-amber-400 transition-colors">وصفات العيد</Link>
-          <Link href="/articles" className="hover:text-amber-400 transition-colors">نصائح المطبخ</Link>
+          <Link href="/articles" className="hover:text-amber-400 transition-colors">افضل وصفات العيد </Link>
         </nav>
 
         {/* زر الموبايل - Mobile Menu Button */}
