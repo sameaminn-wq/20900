@@ -1,7 +1,24 @@
 import { getRecipe } from "@/lib/db";
 
-export default function RecipePage({ params }) {
-  const recipe = getRecipe(params.slug);
+// 1. تعريف واجهة البيانات (Interface) للبارامترات
+interface PageProps {
+  params: {
+    slug: string;
+  };
+}
+
+// 2. تعريف واجهة لبيانات الوصفة (اختياري لكنه احترافي)
+interface Recipe {
+  title: string;
+  image: string;
+  time: number | string;
+  ingredients: string[];
+  steps: string[];
+}
+
+export default function RecipePage({ params }: PageProps) {
+  // الحصول على الوصفة وتحديد نوعها
+  const recipe = getRecipe(params.slug) as Recipe;
 
   if (!recipe) {
     return (
@@ -16,7 +33,7 @@ export default function RecipePage({ params }) {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 md:py-12" dir="rtl">
       
-      {/* صورة الوصفة - متجاوبة بذكاء */}
+      {/* صورة الوصفة */}
       <div className="relative aspect-video md:aspect-[21/9] w-full overflow-hidden rounded-[2rem] shadow-2xl shadow-orange-100 mb-8 md:mb-12">
         <img 
           src={recipe.image} 
@@ -42,37 +59,37 @@ export default function RecipePage({ params }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         
-        {/* المكونات - جانبية في الشاشات الكبيرة */}
+        {/* المكونات */}
         <section className="lg:col-span-1">
           <div className="bg-slate-50 p-6 md:p-8 rounded-3xl border border-slate-100 sticky top-24">
             <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
               <span className="text-orange-500 text-3xl">🛒</span> المكونات
             </h2>
             <ul className="space-y-4">
-              {recipe.ingredients.map((i, index) => (
+              {recipe.ingredients.map((ingredient, index) => (
                 <li key={index} className="flex items-start gap-3 text-slate-700 font-medium">
                   <span className="w-2 h-2 rounded-full bg-orange-400 mt-2.5 shrink-0"></span>
-                  {i}
+                  {ingredient}
                 </li>
               ))}
             </ul>
           </div>
         </section>
 
-        {/* طريقة التحضير - الجزء الأكبر */}
+        {/* طريقة التحضير */}
         <section className="lg:col-span-2">
           <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8 flex items-center gap-2">
             <span className="text-orange-500 text-3xl">👨‍🍳</span> طريقة التحضير
           </h2>
           <ol className="space-y-6">
-            {recipe.steps.map((s, index) => (
+            {recipe.steps.map((step, index) => (
               <li key={index} className="flex gap-4 group">
                 <span className="flex-shrink-0 w-10 h-10 rounded-2xl bg-orange-600 text-white flex items-center justify-center font-black text-lg shadow-lg shadow-orange-200 transition-transform group-hover:scale-110">
                   {index + 1}
                 </span>
                 <div className="pt-1.5">
-                  <p className="text-slate-700 leading-extra-loose text-lg md:text-xl">
-                    {s}
+                  <p className="text-slate-700 leading-relaxed text-lg md:text-xl">
+                    {step}
                   </p>
                 </div>
               </li>
@@ -82,7 +99,7 @@ export default function RecipePage({ params }) {
 
       </div>
 
-      {/* زر مشاركة أو طباعة */}
+      {/* زر مشاركة */}
       <footer className="mt-16 pt-8 border-t border-slate-100 flex justify-center gap-4">
         <button className="bg-slate-900 text-white px-8 py-3 rounded-2xl hover:bg-orange-600 transition-all font-bold shadow-lg shadow-slate-200">
            مشاركة الوصفة 🔗
