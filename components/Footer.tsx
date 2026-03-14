@@ -33,7 +33,7 @@ export default function Footer() {
     terms: {
       title: "شروط الاستخدام",
       icon: "📜",
-      content: `باستخدامك لموقع TastyRecipes، فإنك توافق على:\n\n1. المحتوى مخصص للاستخدام الشخصي فقط.\n2. الموقع غير مسؤول عن النتائج الناتجة عن سوء تطبيق الوصفات.\n3. يسمح نسخ المحتوى مع ذكر المصدر.`
+      content: `باستخدامك لموقع TastyRecipes، فإنك توافق على:\n\n1. المحتوى مخصص لكل للاستخدامات  .\n2. الموقع غير مسؤول عن النتائج الناتجة عن سوء تطبيق الوصفات.\n3. يسمح نسخ المحتوى مع ذكر المصدر.`
     }
   };
 
@@ -72,7 +72,7 @@ export default function Footer() {
         {/* القسم الأول: عن الموقع */}
         <div className="space-y-4">
           <h3 className="text-white font-black mb-3 text-2xl tracking-tight flex items-center gap-2">
-            <span className="text-orange-500">Tasty</span>Recipes
+            <span className="text-orange-500">Tasty</span>Recipess
           </h3>
           <p className="text-sm leading-relaxed text-slate-400 max-w-xs">
             منصتكم المفضلة لاكتشاف أشهى الوصفات العربية والعالمية بطرق سهلة ومبتكرة تناسب حياتكم اليومية.

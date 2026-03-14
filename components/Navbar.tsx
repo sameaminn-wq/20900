@@ -15,14 +15,14 @@ export default function Navbar() {
         
         {/* الشعار - Logo */}
         <Link href="/" className="font-black text-2xl tracking-tighter text-amber-500" onClick={closeMenu}>
-          TastyRecipes
+          TastyRecipess
         </Link>
 
         {/* القائمة لمتصفحات الكمبيوتر - Desktop Menu */}
         <nav className="hidden md:flex gap-6 lg:gap-8 text-sm font-bold">
           <Link href="/" className="hover:text-amber-400 transition-colors">الرئيسية</Link>
           <Link href="/recipes" className="hover:text-amber-400 transition-colors">الوصفات</Link>
-          <Link href="/fastest" className="hover:text-amber-400 transition-colors">أسرع وصفات</Link>
+          <Link href="/fastest" className="hover:text-amber-400 transition-colors">أسرع ولا وصفات</Link>
           <Link href="/eid" className="hover:text-amber-400 transition-colors">وصفات العيد</Link>
           {/* تم إضافة قسم الدايت هنا */}
           <Link href="/diet" className="text-green-400 hover:text-green-300 transition-colors">قسم الدايت 🥗</Link>
