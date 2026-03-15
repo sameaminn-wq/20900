@@ -14,29 +14,23 @@ export async function POST(req: Request) {
       );
     }
 
-    // --- إضافة منطق التبديل التلقائي هنا ---
+    // --- منطق التبديل التلقائي لضمان تجاوز خطأ 404 ---
     const MODELS_TO_TRY = [
       "gemini-1.5-flash",
       "gemini-2.0-flash",
-      "gemini-1.5-flash-latest"
+      "gemini-1.5-flash-8b"
     ];
 
     let model;
+    let result;
     let lastError;
 
+    // محاولة استدعاء الموديلات المتاحة
     for (const modelName of MODELS_TO_TRY) {
       try {
-        model = genAI.getGenerativeModel({ model: modelName });
-        // نتحقق من الموديل بمحاولة تشغيله
-        break; 
-      } catch (err) {
-        lastError = err;
-        continue;
-      }
-    }
-    // ---------------------------------------
-
-    const prompt = `أنت الشيف العالمي    — حاصل على نجمتَي ميشلان، ودكتوراه في علوم التغذية الإكلينيكية من جامعة هارفارد، وصاحب خبرة ميدانية تمتد لأكثر من 60 عامًا في أرقى مطابخ باريس وطوكيو والقاهرة. 
+        const currentModel = genAI.getGenerativeModel({ model: modelName });
+        
+        const prompt = `أنت الشيف العالمي الدكتور كمال النوري — حاصل على نجمتَي ميشلان، ودكتوراه في علوم التغذية الإكلينيكية من جامعة هارفارد، وصاحب خبرة ميدانية تمتد لأكثر من 60 عامًا في أرقى مطابخ باريس وطوكيو والقاهرة. 
 
 قضيت عمرك تفهم العلاقة الدقيقة بين الغذاء والجسم، وتحول أبسط المكونات إلى وجبات شافية تُغذي الخلايا وتُسعد الروح.
 
@@ -83,17 +77,26 @@ export async function POST(req: Request) {
   "nutritionistNote": "ملاحظة الخبير الغذائي — متى تُناسب هذه الوصفة؟ من يجب أن يتجنبها؟"
 }`;
 
-    const result = await model.generateContent(prompt);
+        result = await currentModel.generateContent(prompt);
+        if (result) break; // إذا نجح التوليد نخرج من الحلقة
+      } catch (err) {
+        lastError = err;
+        console.warn(`فشل الموديل ${modelName}، يجري تجربة الموديل التالي...`);
+        continue;
+      }
+    }
+
+    if (!result) throw lastError;
+    // ----------------------------------------------
+
     const response = await result.response;
     const text = response.text();
 
-    // تنظيف الاستجابة من أي backticks أو نص إضافي
     const cleanText = text
       .replace(/```json\s*/gi, "")
       .replace(/```\s*/g, "")
       .trim();
 
-    // محاولة استخراج JSON من الاستجابة
     const jsonMatch = cleanText.match(/\{[\s\S]*\}/);
     if (!jsonMatch) {
       throw new Error("لم يتم العثور على JSON صالح في الاستجابة");
