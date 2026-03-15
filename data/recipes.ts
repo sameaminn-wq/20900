@@ -3713,7 +3713,7 @@ export const recipes = [
     {
       slug: "pasta-pesto-quick",
       title: "باستا البيستو الخضراء السريعة وجبة إيطالية عطرة في 15 دقيقة",
-      category: "fastest",
+      category:"fastest",
       time: 15,
       rating: 4.8,
       image: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?q=80&w=600",
@@ -3725,7 +3725,7 @@ export const recipes = [
     {
       slug: "crepe-nutella",
       title: "كريب النوتيلا السريع وجبة حلوة في 15 دقيقة",
-      category: "fastest",
+      category:"fastest",
       time: 15,
       rating: 4.8,
       image: "https://images.unsplash.com/photo-1519676867240-f03562e64548?q=80&w=600",
@@ -3737,7 +3737,7 @@ export const recipes = [
     {
       slug: "salmon-avocado-bowl",
       title: "طبق السلمون بالأفوكادو السريع وجبة صحية راقية",
-      category: "fastest",
+      category:"fastest",
       time: 15,
       rating: 4.8,
       image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?q=80&w=600",
@@ -3749,7 +3749,7 @@ export const recipes = [
     {
       slug: "lentil-soup-quick",
       title: "شوربة العدس السريعة بالليمون والكمون وجبة مغذية",
-      category: "fastest",
+      category:"fastest",
       time: 25,
       rating: 4.7,
       image: "https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=600",
@@ -3761,7 +3761,7 @@ export const recipes = [
     {
       slug: "mashed-potato-quick",
       title: "هريسة البطاطس الكريمية السريعة طبق جانبي مميز",
-      category: "fastest",
+      category:"fastest",
       time: 20,
       rating: 4.6,
       image: "https://images.unsplash.com/photo-1615719413546-198b25453f85?q=80&w=600",
@@ -3773,7 +3773,7 @@ export const recipes = [
     {
       slug: "grilled-fish-quick",
       title: "سمك مشوي سريع بالليمون والأعشاب وجبة خفيفة صحية",
-      category: "fastest",
+      category:"fastest",
       time: 15,
       rating: 4.7,
       image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=600",
@@ -3785,7 +3785,7 @@ export const recipes = [
     {
       slug: "spring-rolls-quick",
       title: "سبرينج رولز بالخضروات السريعة وجبة آسيوية خفيفة",
-      category: "fastest",
+      category:"fastest",
       time: 20,
       rating: 4.5,
       image: "https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600",
@@ -3797,7 +3797,7 @@ export const recipes = [
     {
       slug: "couscous-quick",
       title: "كسكسي بالخضروات السريع وجبة مغربية أصيلة في 20 دقيقة",
-      category: "fastest",
+      category:"fastest",
       time: 20,
       rating: 4.6,
       image: "https://images.unsplash.com/photo-1515443961218-a51367888e4b?q=80&w=600",
@@ -3809,7 +3809,7 @@ export const recipes = [
     {
       slug: "quesadilla-cheese-veggie",
       title: "كيساديا الخضروات النباتية السريعة وجبة صحية مقرمشة",
-      category: "fastest",
+      category:"fastest",
       time: 15,
       rating: 4.5,
       image: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?q=80&w=600",
@@ -3821,7 +3821,7 @@ export const recipes = [
     {
       slug: "bean-burrito",
       title: "بوريتو الفاصوليا السريع وجبة نباتية شبعانة في 15 دقيقة",
-      category: "fastest",
+      category:"fastest",
       time: 15,
       rating: 4.5,
       image: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?q=80&w=600",
@@ -3833,7 +3833,7 @@ export const recipes = [
     {
       slug: "banana-smoothie-quick",
       title: "سموذي الموز والحليب السريع طاقة في 5 دقائق",
-      category: "fastest",
+      category:"fastest",
       time: 5,
       rating: 4.5,
       image: "https://images.unsplash.com/photo-1481671703460-040cb8a2d909?q=80&w=600",
@@ -3845,7 +3845,7 @@ export const recipes = [
     {
       slug: "poached-egg-spinach",
       title: "بيض مسلوق مكشوف بالسبانخ والطحينة فطار صحي راقٍ",
-      category: "fastest",
+      category:"fastest",
       time: 15,
       rating: 4.7,
       image: "https://images.unsplash.com/photo-1482049016688-2d3e1b311543?q=80&w=600",
@@ -3857,7 +3857,7 @@ export const recipes = [
     {
       slug: "garlic-bread-quick",
       title: "خبز الثوم المحمص السريع مقبلات لذيذة في 10 دقائق",
-      category: "fastest",
+      category:"fastest",
       time: 10,
       rating: 4.7,
       image: "https://images.unsplash.com/photo-1573140247632-f8fd74997d5c?q=80&w=600",
@@ -3869,7 +3869,7 @@ export const recipes = [
     {
       slug: "prawn-garlic-butter",
       title: "جمبري بالثوم والزبدة السريع وجبة مأكولات بحرية فاخرة",
-      category: "fastest",
+      category:"fastest",
       time: 10,
       rating: 4.9,
       image: "https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?q=80&w=600",
@@ -3881,7 +3881,7 @@ export const recipes = [
     {
       slug: "chocolate-banana-oat",
       title: "بورريدج الشوفان بالشوكولاتة والموز فطور دسم في 10 دقائق",
-      category: "fastest",
+      category:"fastest",
       time: 10,
       rating: 4.6,
       image: "https://images.unsplash.com/photo-1517673400267-0251440c45dc?q=80&w=600",
@@ -3893,7 +3893,7 @@ export const recipes = [
     {
       slug: "sandwich-brie-fig",
       title: "ساندويتش جبن البري بالتين والعسل مقبل راقٍ سريع",
-      category: "fastest",
+      category:"fastest",
       time: 8,
       rating: 4.6,
       image: "https://images.unsplash.com/photo-1528736235302-52922df5c122?q=80&w=600",
@@ -3905,7 +3905,7 @@ export const recipes = [
     {
       slug: "pasta-carbonara-quick",
       title: "باستا كاربونارا الإيطالية الكلاسيكية في 20 دقيقة",
-      category: "fastest",
+      category:"fastest",
       time: 20,
       rating: 4.9,
       image: "https://images.unsplash.com/photo-1612874742237-6526221588e3?q=80&w=600",
@@ -3917,7 +3917,7 @@ export const recipes = [
     {
       slug: "bruschetta-ricotta",
       title: "بروشيتا الريكوتا والعسل مقبل فاخر سريع",
-      category: "fastest",
+      category:"fastest",
       time: 8,
       rating: 4.7,
       image: "https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?q=80&w=600",
@@ -3929,7 +3929,7 @@ export const recipes = [
     {
       slug: "chicken-noodle-soup",
       title: "شوربة دجاج بالنودلز الكلاسيكية علاج طبيعي دافئ",
-      category: "fastest",
+      category:"fastest",
       time: 25,
       rating: 4.8,
       image: "https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=600",
@@ -3941,7 +3941,7 @@ export const recipes = [
     {
       slug: "cheese-souffle-quick",
       title: "سوفليه الجبن السريع فطار فرنسي راقٍ في 20 دقيقة",
-      category: "fastest",
+      category:"fastest",
       time: 20,
       rating: 4.5,
       image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?q=80&w=600",
@@ -3953,7 +3953,7 @@ export const recipes = [
     {
       slug: "veggie-stir-fry",
       title: "سوتيه الخضروات الصيني السريع وجبة نباتية صحية في 15 دقيقة",
-      category: "fastest",
+      category:"fastest",
       time: 15,
       rating: 4.5,
       image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=600",
@@ -3965,7 +3965,7 @@ export const recipes = [
     {
       slug: "flatbread-labneh",
       title: "خبز اللبنة مع الزعتر والزيتون فطور شامي أصيل",
-      category: "fastest",
+      category:"fastest",
       time: 5,
       rating: 4.7,
       image: "https://images.unsplash.com/photo-1617196034183-421b4040ed20?q=80&w=600",
@@ -3977,7 +3977,7 @@ export const recipes = [
     {
       slug: "corn-fritters",
       title: "عجة الذرة المقلية السريعة وجبة خفيفة لذيذة",
-      category: "fastest",
+      category:"fastest",
       time: 15,
       rating: 4.5,
       image: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?q=80&w=600",
@@ -3989,7 +3989,7 @@ export const recipes = [
     {
       slug: "pasta-arrabiata",
       title: "باستا أرابياتا حارة سريعة وجبة إيطالية بنكهة قوية",
-      category: "fastest",
+      category:"fastest",
       time: 20,
       rating: 4.7,
       image: "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=600",
@@ -4001,7 +4001,7 @@ export const recipes = [
     {
       slug: "tuna-melt-toast",
       title: "توست التونة المذابة بالجبن وجبة سريعة دسمة مميزة",
-      category: "fastest",
+      category:"fastest",
       time: 12,
       rating: 4.6,
       image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?q=80&w=600",
@@ -4013,7 +4013,7 @@ export const recipes = [
     {
       slug: "cucumber-yogurt-salad",
       title: "سلطة الخيار بالزبادي اليونانية التزاتزيكي طازجة في 5 دقائق",
-      category: "fastest",
+      category:"fastest",
       time: 5,
       rating: 4.6,
       image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=600",
@@ -4037,7 +4037,7 @@ export const recipes = [
     {
       slug: "lemon-rice-quick",
       title: "أرز بالليمون والكزبرة الهندي السريع طبق جانبي عطر",
-      category: "fastest",
+      category:"fastest",
       time: 15,
       rating: 4.5,
       image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?q=80&w=600",
@@ -4049,7 +4049,7 @@ export const recipes = [
     {
       slug: "mini-quiche-quick",
       title: "كيش الجبن والسبانخ الصغير فطار فرنسي أنيق",
-      category: "fastest",
+      category:"fastest",
       time: 25,
       rating: 4.6,
       image: "https://images.unsplash.com/photo-1527515637462-cff94edd56f9?q=80&w=600",
@@ -4061,7 +4061,7 @@ export const recipes = [
     {
       slug: "vegetable-frittata",
       title: "فريتاتا الخضروات الإيطالية فطار غني في 20 دقيقة",
-      category: "fastest",
+      category:"fastest",
       time: 20,
       rating: 4.7,
       image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?q=80&w=600",
@@ -4073,7 +4073,7 @@ export const recipes = [
     {
       slug: "club-sandwich-quick",
       title: "كلوب ساندويتش كلاسيكي سريع وجبة غداء فندقية في 15 دقيقة",
-      category: "fastest",
+      category:"fastest",
       time: 15,
       rating: 4.7,
       image: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?q=80&w=600",
@@ -4085,7 +4085,7 @@ export const recipes = [
     {
       slug: "chickpea-stew-quick",
       title: "يخنة الحمص السريعة بالطماطم والتوابل وجبة نباتية مشبعة",
-      category: "fastest",
+      category:"fastest",
       time: 20,
       rating: 4.6,
       image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=600",
@@ -4097,7 +4097,7 @@ export const recipes = [
     {
       slug: "ham-cheese-croissant",
       title: "كرواسون الجبن والهام السريع فطار فرنسي في 10 دقائق",
-      category: "fastest",
+      category:"fastest",
       time: 10,
       rating: 4.6,
       image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=600",
@@ -4109,7 +4109,7 @@ export const recipes = [
     {
       slug: "traditional-baklava-syrup",
       title: "بقلاوة العيد التركية: سر الطبقات الكثيرة والقرمشة التي تدوم",
-      category: "eid",
+      category:"eid",
       time: 70,
       rating: 4.9,
       image: "https://images.unsplash.com/photo-1519676867240-f03562e64548?q=80&w=600&auto=format&fit=crop",
