@@ -1,8 +1,8 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
 
-// الحل النهائي: نستخدم المفتاح من البيئة، أو المفتاح الاحتياطي لضمان التشغيل في StackBlitz
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "AIzaSyAt12S2n4puBJcIDyzvYF8VRPEPkL2odrs");
+// الحل النهائي: نستخدم المفتاح من! البيئة، أو المفتاح الاحتياطي لضمان التشغيل في StackBlitz
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
 // مصفوفة الموديلات المتاحة لتجربتها بالترتيب في حال فشل أحدها
 const MODELS_TO_TRY = [
