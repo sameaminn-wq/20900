@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "AIzaSyAt12S2n4puBJcIDyzvYF8VRPEPkL2odrs");
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
 // مصفوفة الموديلات المتاحة لتجربتها بالترتيب في حال فشل أحدها
 const MODELS_TO_TRY = [
@@ -114,12 +114,19 @@ export async function POST(req: Request) {
   } catch (error: any) {
     console.error("DEBUG_ERROR:", error); 
 
+    // إذا كان الخطأ بسبب الزحام (Quota) 429
+    if (error.status === 429 || error.message?.includes("429")) {
+      return NextResponse.json(
+        { 
+          error: "الشيف مشغول الآن", 
+          details: "لقد أرسلت طلبات كثيرة بسرعة. يرجى الانتظار دقيقة واحدة ثم المحاولة مرة أخرى." 
+        },
+        { status: 429 }
+      );
+    }
+
     return NextResponse.json(
-      { 
-        error: "فشل في التوليد", 
-        details: error.message,
-        raw: error
-      },
+      { error: "فشل في التوليد", details: error.message },
       { status: 500 }
     );
   }
