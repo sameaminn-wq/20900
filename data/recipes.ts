@@ -321,7 +321,7 @@ export const recipes = [
   {
     slug: "creamy-rice-pudding",
     title: "أرز بلبن المحلات: سر الطبقة المكرمشة والقوام الكريمي",
-    category: "dessert",
+    category: "eid",
     time: 45,
     rating: 4.7,
     image: "https://images.unsplash.com/photo-1590080876351-941da3576dee?q=80&w=600&auto=format&fit=crop",
@@ -393,7 +393,7 @@ export const recipes = [
   {
     slug: "classic-cinnabon-rolls",
     title: "سينابون رولز (Cinnabon): بعجينة قطنية وصوص الجبن الغني",
-    category: "dessert",
+    category: "eid",
     time: 150,
     rating: 4.9,
     image: "https://images.unsplash.com/photo-1509315811345-672d83ef2fbc?q=80&w=600&auto=format&fit=crop",
@@ -504,7 +504,7 @@ export const recipes = [
   {
     slug: "perfect-pancake-fluffy",
     title: "بان كيك هش (Fluffy Pancakes): أسرار الفطور الأمريكي المثالي",
-    category: "dessert",
+    category: "eid",
     time: 20,
     rating: 4.6,
     image: "https://images.unsplash.com/photo-1567620905732-2d1ec7bb7445?q=80&w=600&auto=format&fit=crop",
@@ -787,7 +787,7 @@ export const recipes = [
     {
       slug: "quick-garlic-shrimp",
       title: "جمبري بالثوم والليمون: أسرع وجبة عشاء في 10 دقائق",
-      category: "fast",
+      category: "fastest",
       time: 10,
       rating: 4.8,
       image: "https://images.unsplash.com/photo-1559742811-822873691df8?q=80&w=600&auto=format&fit=crop",
@@ -1410,7 +1410,7 @@ export const recipes = [
     },{
       slug:"homemade-fast-burger",
       title:"طريقة عمل البرجر المنزلي السريع مثل المطاعم",
-      category:"fast",
+      category:"fastest",
       time:20,
       rating:4.8,
       image:"https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=600&auto=format&fit=crop",
@@ -1441,7 +1441,7 @@ export const recipes = [
       },{
         slug:"quick-pan-pizza",
         title:"بيتزا سريعة في المقلاة خلال 10 دقائق",
-        category:"fast",
+        category:"fastest",
         time:15,
         rating:4.7,
         image:"https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?q=80&w=600&auto=format&fit=crop",
@@ -1471,7 +1471,7 @@ export const recipes = [
         },{
           slug:"quick-tomato-pasta",
           title:"مكرونة سريعة بصلصة الطماطم في 15 دقيقة",
-          category:"fast",
+          category:"fastest",
           time:15,
           rating:4.6,
           image:"https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?q=80&w=600&auto=format&fit=crop",
@@ -1500,7 +1500,7 @@ export const recipes = [
           },{
             slug:"quick-shawarma-sandwich",
             title:"سندويتش شاورما سريع في المنزل",
-            category:"fast",
+            category:"fastest",
             time:20,
             rating:4.7,
             image:"https://images.unsplash.com/photo-1529006557810-274b9b2fc783?q=80&w=600&auto=format&fit=crop",
@@ -1529,7 +1529,7 @@ export const recipes = [
             },{
               slug:"egg-toast-fast",
               title:"توست البيض السريع للفطور في 10 دقائق",
-              category:"fast",
+              category:"fastest",
               time:10,
               rating:4.5,
               image:"https://images.unsplash.com/photo-1525351484163-7529414344d8?q=80&w=600&auto=format&fit=crop",
@@ -1557,7 +1557,7 @@ export const recipes = [
               },{
                 slug:"egyptian-kahk-eid",
                 title:"كحك العيد المصري الناعم بالسكر البودرة",
-                category:"dessert",
+                category:"eid",
                 time:90,
                 rating:4.9,
                 image:"https://images.unsplash.com/photo-1604908176997-4319e6c3a7c2?q=80&w=600&auto=format&fit=crop",
@@ -1584,7 +1584,7 @@ export const recipes = [
                 {
                 slug:"egyptian-ghorayeba",
                 title:"الغريبة المصرية الناعمة بثلاث مكونات",
-                category:"dessert",
+                category:"eid",
                 time:40,
                 rating:4.8,
                 image:"https://images.unsplash.com/photo-1587241321921-91a834d6d191?q=80&w=600&auto=format&fit=crop",
@@ -1609,10 +1609,10 @@ export const recipes = [
                 {
                 slug:"sudanese-kahk",
                 title:"كعك العيد السوداني بالتمر",
-                category:"dessert",
+                category:"eid",
                 time:80,
                 rating:4.7,
-                image:"https://images.unsplash.com/photo-1541599540903-216a46ca1dc0?q=80&w=600&auto=format&fit=crop",
+                image:"https://images.unsplash.com/photo-1541599540903-216a4ca1dc0?q=80&w=600&auto=format&fit=crop",
                 description:"كعك سوداني تقليدي يحضر غالباً بحشوة التمر ويقدم في الأعياد.",
                 ingredients:[
                 "3 كوب دقيق",
@@ -1636,7 +1636,7 @@ export const recipes = [
                 {
                 slug:"saudi-maamoul",
                 title:"معمول التمر السعودي الهش",
-                category:"dessert",
+                category:"eid",
                 time:70,
                 rating:4.9,
                 image:"https://images.unsplash.com/photo-1617196038434-15fda6b2f389?q=80&w=600&auto=format&fit=crop",
@@ -1662,7 +1662,7 @@ export const recipes = [
                 {
                 slug:"saudi-luqaimat",
                 title:"لقيمات سعودية مقرمشة بالعسل",
-                category:"dessert",
+                category:"eid",
                 time:35,
                 rating:4.8,
                 image:"https://images.unsplash.com/photo-1625944525903-cb0f4c18a5e3?q=80&w=600&auto=format&fit=crop",
@@ -1688,7 +1688,7 @@ export const recipes = [
                 {
                 slug:"moroccan-chebakia",
                 title:"الشباكية المغربية بالسمسم والعسل",
-                category:"dessert",
+                category:"eid",
                 time:90,
                 rating:4.9,
                 image:"https://images.unsplash.com/photo-1599785209707-28d64db3f7e1?q=80&w=600&auto=format&fit=crop",
@@ -1714,7 +1714,7 @@ export const recipes = [
                 {
                 slug:"moroccan-ghriba",
                 title:"غريبة اللوز المغربية",
-                category:"dessert",
+                category:"eid",
                 time:45,
                 rating:4.7,
                 image:"https://images.unsplash.com/photo-1606312619349-0f7d4e8c2a52?q=80&w=600&auto=format&fit=crop",
@@ -1739,7 +1739,7 @@ export const recipes = [
                 {
                 slug:"tunisian-makroudh",
                 title:"المقروض التونسي بالتمر",
-                category:"dessert",
+                category:"eid",
                 time:75,
                 rating:4.8,
                 image:"https://images.unsplash.com/photo-1589308078059-be1415eab4c3?q=80&w=600&auto=format&fit=crop",
@@ -1765,7 +1765,7 @@ export const recipes = [
                 {
                 slug:"tunisian-baklawa",
                 title:"بقلاوة تونسية بالفستق",
-                category:"dessert",
+                category:"eid",
                 time:90,
                 rating:4.9,
                 image:"https://images.unsplash.com/photo-1621303837174-89787a7d4729?q=80&w=600&auto=format&fit=crop",
@@ -1786,12 +1786,130 @@ export const recipes = [
                 "يسكب العسل فوقها."
                 ],
                 proTips:"ترك البقلاوة عدة ساعات يساعدها على امتصاص العسل."
+                },{
+                  slug: "healthy-oatmeal-breakfast",
+                  title: "شوفان الفطور الصحي للتخسيس",
+                  category: "diet",
+                  time: 10,
+                  rating: 4.8,
+                  views: 800,
+                  image: "https://images.unsplash.com/photo-1517673132405-a56a62b18caf",
+                  description: "فطور صحي غني بالألياف يمنحك طاقة طوال اليوم.",
+                  ingredients: ["شوفان", "حليب قليل الدسم", "موز", "عسل"],
+                  steps: [
+                    "ابدأ يومك بنشاط واسكب الشوفان مع الحليب في وعاء صغير، كأنهما ثنائي مثالي لفطور صحي متكامل.",
+                    "امنح الخليط 5 دقائق من الاسترخاء فوق نار هادئة حتى ينضج ويصبح القوام كريمياً يفتح الشهية.",
+                    "وقت اللمسة الفنية! أضف قطع الموز الطازجة وقطرات العسل الذهبية لتحلية طبيعية بدون سعرات زائدة.",
+                    "قدم طبق الشوفان دافئاً واستمتع بأفضل وجبة فطور للتخسيس تمنحك الشبع لفترة طويلة."
+                  ]
+                },
+                {
+                  slug: "grilled-chicken-salad",
+                  title: "سلطة الدجاج المشوي الصحية",
+                  category: "diet",
+                  time: 20,
+                  rating: 4.9,
+                  views: 950,
+                  image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c",
+                  description: "سلطة غنية بالبروتين مثالية للدايت.",
+                  ingredients: ["صدر دجاج", "خس", "طماطم", "ليمون"],
+                  steps: [
+                    "اجعل صدور الدجاج تكتسب لون الشواء الذهبي فوق الجريل للحصول على بروتين صافي وطعم مدخن رائع.",
+                    "حول الخضار الورقية والطماطم إلى لوحة فنية عبر تقطيعها لقطع صغيرة سهلة الأكل ومليئة بالفيتامينات.",
+                    "اخلط المكونات في وعاء كبير لتمتزج نكهة الدجاج المشوي مع طزاجة الخضروات في أفضل سلطة دايت.",
+                    "أضف عصرة الليمون المنعشة كأخر لمسة سحرية لتحفيز الحرق وإضافة نكهة حامضة لذيذة."
+                  ]
+                },
+                {
+                  slug: "banana-oat-pancakes",
+                  title: "بان كيك الشوفان والموز الصحي",
+                  category: "diet",
+                  time: 15,
+                  rating: 4.7,
+                  views: 730,
+                  image: "https://images.unsplash.com/photo-1528207776546-365bb710ee93",
+                  description: "بان كيك بدون دقيق أبيض مناسب للرجيم.",
+                  ingredients: ["موز", "بيض", "شوفان"],
+                  steps: [
+                    "اخلط الموز والبيض والشوفان جيداً حتى تحصل على عجينة بان كيك متجانسة وخالية من الدقيق الأبيض.",
+                    "بكل هدوء، اسكب الخليط في مقلاة غير لاصقة لتشكل دوائر السعادة الصحية التي يحبها الجميع.",
+                    "اطهه على نار متوسطة حتى يتحمر الوجهين ويصبح لديك بان كيك ذهبي وهش مثالي للرجيم.",
+                    "قدمه مع لمسة عسل خفيفة واستمتع بحلوى صحية لا تزيد الوزن."
+                  ]
+                },
+                {
+                  slug: "avocado-toast",
+                  title: "توست الأفوكادو الصحي",
+                  category: "breakfast",
+                  time: 5,
+                  rating: 4.6,
+                  views: 1100,
+                  image: "https://images.unsplash.com/photo-1541519227354-08fa5d50c44d",
+                  description: "فطور سريع غني بالدهون الصحية.",
+                  ingredients: ["خبز", "أفوكادو", "ليمون"],
+                  steps: [
+                    "حمص شريحة الخبز (يفضل الأسمر) حتى تصبح مقرمشة وجاهزة لاستقبال كنوز الطبيعة.",
+                    "اهرسي الأفوكادو الكريمي ووزعه بنعومة فوق التوست للحصول على دهون صحية تدعم صحة قلبك.",
+                    "أضف قطرات من الليمون الطازج ورشة فلفل لتجعل الطعم ينبض بالحياة في فطور سريع ومغذي.",
+                    "قدمه فوراً واستمتع بمذاق فخم يشبه فطور الفنادق بلمسة منزلية بسيطة."
+                  ]
+                },
+                {
+                  slug: "kahk-eid-egyptian",
+                  title: "كحك العيد المصري",
+                  category: "eid",
+                  time: 90,
+                  rating: 5,
+                  views: 2000,
+                  image: "https://images.unsplash.com/photo-1604908176997-4319e6c3a7c2",
+                  description: "حلوى العيد التقليدية في مصر.",
+                  ingredients: ["دقيق", "سمن", "سكر"],
+                  steps: [
+                    "اعجن الدقيق مع السمن البلدي برفق وحب حتى تحصل على عجينة ناعمة تذوب في الفم، سر كحك العيد في العجن.",
+                    "شكل العجينة لكرات صغيرة واستخدم المنقاش لتزيينها بالنقوش المصرية الأصيلة التي تعيد ذكريات الطفولة.",
+                    "اخبز الكحك في فرن متوسط الحرارة حتى يصبح لونه ذهبياً فاتحاً وتفوح رائحة العيد في كل أرجاء المنزل.",
+                    "رش السكر البودرة بغزارة فوق الكحك بعد أن يبرد تماماً، وقدمه كأفخم ضيافة لزوارك في العيد."
+                  ]
+                },
+                {
+                  slug: "basbousa",
+                  title: "بسبوسة السميد",
+                  category: "dessert",
+                  time: 50,
+                  rating: 4.8,
+                  views: 1700,
+                  image: "https://images.unsplash.com/photo-1625944525533-473f1a0f2fa3",
+                  description: "حلوى شرقية تقليدية.",
+                  ingredients: ["سميد", "سكر", "قطر"],
+                  steps: [
+                    "اخلط السميد مع السكر والسمن جيداً لتضمن أن كل حبة سميد مغلفة باللذة قبل دخولها الفرن.",
+                    "اخبز البسبوسة في صينية مدهونة حتى تتحول أطرافها للون الذهبي الغامق وتكتسب قواماً متماسكاً وناجحاً.",
+                    "أضف القطر (الشربات) الساخن فور خروجها من الفرن لتسمع صوت النجاح وتضمن أنها ستكون طرية جداً.",
+                    "اتركها تبرد قليلاً لتتماسك، ثم قطعها وقدمها كأشهر حلى شرقي منزلي ينافس المحلات."
+                  ]
+                },
+                {
+                  slug: "fruit-salad-diet",
+                  title: "سلطة الفواكه الصحية",
+                  category: "diet",
+                  time: 5,
+                  rating: 4.7,
+                  views: 410,
+                  image: "https://images.unsplash.com/photo-1564093497595-593b96d80180",
+                  description: "سلطة فواكه منعشة.",
+                  ingredients: ["تفاح", "موز", "فراولة"],
+                  steps: [
+                    "قطع التفاح والموز والفراولة لقطع متساوية، لتجمع ألوان الطبيعة المبهجة في طبق واحد مليء بالفيتامينات.",
+                    "اخلط الفواكه معاً برفق حتى تتمازج السوائل الطبيعية وتخلق صوصاً حلواً ومنعشاً بدون سكر مضاف.",
+                    "قدم سلطة الفواكه باردة كوجبة خفيفة (سناك) مثالية للدايت أو كتحلية صحية بعد الغداء.",
+                    "استمتع بالانتعاش الفوري مع كل ملعقة من هذا الكوكتيل الطبيعي السهل والسريع."
+                  ]
                 },
                 
                 {
                 slug:"libyan-ghraybeh",
                 title:"غريبة ليبية تقليدية",
-                category:"dessert",
+                category:"eid",
                 time:40,
                 rating:4.6,
                 image:"https://images.unsplash.com/photo-1605475128892-6a86c1c87a0e?q=80&w=600&auto=format&fit=crop",
@@ -1816,7 +1934,7 @@ export const recipes = [
                 {
                 slug:"libyan-bazeen-sweet",
                 title:"حلوى الدبلة الليبية",
-                category:"dessert",
+                category:"eid",
                 time:60,
                 rating:4.7,
                 image:"https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?q=80&w=600&auto=format&fit=crop",
@@ -1842,7 +1960,7 @@ export const recipes = [
                 {
                 slug:"sudanese-basbousa",
                 title:"بسبوسة سودانية بالسميد وجوز الهند",
-                category:"dessert",
+                category:"eid",
                 time:50,
                 rating:4.7,
                 image:"https://images.unsplash.com/photo-1625944525533-473f1a0f2fa3?q=80&w=600&auto=format&fit=crop",
@@ -1868,7 +1986,7 @@ export const recipes = [
                 {
                 slug:"moroccan-briwat",
                 title:"بريوات مغربية باللوز والعسل",
-                category:"dessert",
+                category:"eid",
                 time:60,
                 rating:4.8,
                 image:"https://images.unsplash.com/photo-1621939514649-280e2ee25f60?q=80&w=600&auto=format&fit=crop",
@@ -1894,7 +2012,7 @@ export const recipes = [
                 {
                 slug:"saudi-date-cookies",
                 title:"كوكيز التمر السعودي",
-                category:"dessert",
+                category:"eid",
                 time:45,
                 rating:4.6,
                 image:"https://images.unsplash.com/photo-1499636136210-6f4ee915583e?q=80&w=600&auto=format&fit=crop",
@@ -1920,7 +2038,7 @@ export const recipes = [
                 {
                 slug:"eid-baklava-arabic",
                 title:"بقلاوة العيد بالمكسرات",
-                category:"dessert",
+                category:"eid",
                 time:80,
                 rating:4.9,
                 image:"https://images.unsplash.com/photo-1621939514649-280e2ee25f60?q=80&w=600&auto=format&fit=crop",
@@ -2331,7 +2449,7 @@ export const recipes = [
                     {
                       slug: "avocado-toast",
                       title: "توست الأفوكادو الصحي",
-                      category: "breakfast",
+                      category: "main",
                       time: 5,
                       rating: 4.6,
                       views: 1100,
@@ -2365,7 +2483,7 @@ export const recipes = [
                     {
                       slug: "basbousa",
                       title: "بسبوسة السميد",
-                      category: "dessert",
+                      category: "eid",
                       time: 50,
                       rating: 4.8,
                       views: 1700,
