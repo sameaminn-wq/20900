@@ -1,7 +1,9 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+// تأكد أن المتغير يُقرأ بشكل صحيح من النظام
+const apiKey = process.env.GEMINI_API_KEY || "";
+const genAI = new GoogleGenerativeAI(apiKey);
 
 export async function POST(req: Request) {
   try {
@@ -14,19 +16,19 @@ export async function POST(req: Request) {
       );
     }
 
-    // --- منطق التبديل التلقائي المُصلح ---
+    // --- منطق التبديل التلقائي المُصلح لعام 2026 ---
+    // أضفنا موديلات 2.0 لأنها الأكثر استقراراً حالياً وتتجاوز مشاكل v1beta
     const MODELS_TO_TRY = [
       "gemini-1.5-flash",
-      
-      
-      
+      "gemini-2.0-flash",
+      "gemini-1.5-flash-latest"
     ];
 
     let responseText = "";
     let success = false;
     let lastError = null;
 
-    const prompt = `أنت الشيف العالمي   النوري — حاصل على نجمتَي ميشلان، ودكتوراه في علوم التغذية الإكلينيكية من جامعة هارفارد، وصاحب خبرة ميدانية تمتد لأكثر من 60 عامًا في أرقى مطابخ باريس وطوكيو والقاهرة. 
+    const prompt = `أنت الشيف العالمي كمال النوري — حاصل على نجمتَي ميشلان، ودكتوراه في علوم التغذية الإكلينيكية من جامعة هارفارد، وصاحب خبرة ميدانية تمتد لأكثر من 60 عامًا في أرقى مطابخ باريس وطوكيو والقاهرة. 
 
 قضيت عمرك تفهم العلاقة الدقيقة بين الغذاء والجسم، وتحول أبسط المكونات إلى وجبات شافية تُغذي الخلايا وتُسعد الروح.
 
@@ -76,7 +78,6 @@ export async function POST(req: Request) {
     for (const modelName of MODELS_TO_TRY) {
       try {
         const model = genAI.getGenerativeModel({ model: modelName });
-        // الإصلاح: يجب تنفيذ generateContent داخل المحاولة (try) لاكتشاف الفشل
         const result = await model.generateContent(prompt);
         const response = await result.response;
         responseText = response.text();
@@ -95,15 +96,12 @@ export async function POST(req: Request) {
     if (!success) {
       throw lastError || new Error("فشلت جميع نماذج التوليد");
     }
-    // ---------------------------------------
 
-    // تنظيف الاستجابة من أي backticks أو نص إضافي
     const cleanText = responseText
       .replace(/```json\s*/gi, "")
       .replace(/```\s*/g, "")
       .trim();
 
-    // محاولة استخراج JSON من الاستجابة
     const jsonMatch = cleanText.match(/\{[\s\S]*\}/);
     if (!jsonMatch) {
       throw new Error("لم يتم العثور على JSON صالح في الاستجابة");
