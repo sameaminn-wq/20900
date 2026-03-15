@@ -1,9 +1,4 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
-
-// تأكد أن المتغير يُقرأ بشكل صحيح من النظام
-const apiKey = process.env.GEMINI_API_KEY || "";
-const genAI = new GoogleGenerativeAI(apiKey);
 
 export async function POST(req: Request) {
   try {
@@ -16,18 +11,12 @@ export async function POST(req: Request) {
       );
     }
 
-    // --- منطق التبديل التلقائي المُصلح لعام 2026 ---
-    // أضفنا موديلات 2.0 لأنها الأكثر استقراراً حالياً وتتجاوز مشاكل v1beta
-    const MODELS_TO_TRY = [
-      "gemini-1.5-flash",
-      "gemini-2.0-flash",
-      "gemini-1.5-flash-latest"
-    ];
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      throw new Error("API Key is missing from .env.local");
+    }
 
-    let responseText = "";
-    let success = false;
-    let lastError = null;
-
+    // --- البرومبت الخاص بك كما هو بدون تغيير حرف ---
     const prompt = `أنت الشيف العالمي كمال النوري — حاصل على نجمتَي ميشلان، ودكتوراه في علوم التغذية الإكلينيكية من جامعة هارفارد، وصاحب خبرة ميدانية تمتد لأكثر من 60 عامًا في أرقى مطابخ باريس وطوكيو والقاهرة. 
 
 قضيت عمرك تفهم العلاقة الدقيقة بين الغذاء والجسم، وتحول أبسط المكونات إلى وجبات شافية تُغذي الخلايا وتُسعد الروح.
@@ -75,28 +64,27 @@ export async function POST(req: Request) {
   "nutritionistNote": "ملاحظة الخبير الغذائي — متى تُناسب هذه الوصفة؟ من يجب أن يتجنبها؟"
 }`;
 
-    for (const modelName of MODELS_TO_TRY) {
-      try {
-        const model = genAI.getGenerativeModel({ model: modelName });
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        responseText = response.text();
-        
-        if (responseText) {
-          success = true;
-          break; 
-        }
-      } catch (err) {
-        lastError = err;
-        console.error(`فشل الموديل ${modelName}، جاري تجربة البديل...`);
-        continue;
-      }
+    // --- الاتصال المباشر بـ Google API (تجاوز المكتبة المكسورة) ---
+    // نستخدم v1 بدلاً من v1beta لتجنب الـ 404
+    const url = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+
+    const googleResponse = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+      }),
+    });
+
+    if (!googleResponse.ok) {
+      const errorData = await googleResponse.json();
+      throw new Error(errorData.error?.message || "Google API Error");
     }
 
-    if (!success) {
-      throw lastError || new Error("فشلت جميع نماذج التوليد");
-    }
+    const data = await googleResponse.json();
+    const responseText = data.candidates[0].content.parts[0].text;
 
+    // تنظيف الـ JSON
     const cleanText = responseText
       .replace(/```json\s*/gi, "")
       .replace(/```\s*/g, "")
@@ -107,22 +95,12 @@ export async function POST(req: Request) {
       throw new Error("لم يتم العثور على JSON صالح في الاستجابة");
     }
 
-    const parsed = JSON.parse(jsonMatch[0]);
+    return NextResponse.json(JSON.parse(jsonMatch[0]));
 
-    return NextResponse.json(parsed, {
-      headers: {
-        "Cache-Control": "no-store",
-      },
-    });
   } catch (error: any) {
     console.error("DEBUG_ERROR:", error); 
-
     return NextResponse.json(
-      { 
-        error: "فشل في التوليد", 
-        details: error.message,
-        raw: error
-      },
+      { error: "فشل في التوليد", details: error.message },
       { status: 500 }
     );
   }
