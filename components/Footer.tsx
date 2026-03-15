@@ -145,7 +145,7 @@ export default function Footer() {
               onClick={() => setActiveModal(null)}
               className="w-full bg-white text-slate-950 py-4 rounded-2xl hover:bg-orange-500 hover:text-white transition-all font-bold shadow-xl"
             >
-            !!فهمت ذلك
+            !!!فهمت ذلك
             </button>
           </div>
         </div>
