@@ -321,7 +321,7 @@ export const recipes: Recipe[] = [
   {
     slug: "creamy-rice-pudding",
     title: "أرز بلبن المحلات: سر الطبقة المكرمشة والقوام الكريمي",
-    category: "dessert",
+    category: "main",
     time: 45,
     rating: 4.7,
     image: "https://images.unsplash.com/photo-1590080876351-941da3576dee?q=80&w=600&auto=format&fit=crop",
@@ -1969,7 +1969,7 @@ export const recipes: Recipe[] = [
     ],
     proTips: "العجين السائل الصحيح لا يمسك شكله بل يسقط من الملعقة بسهولة مما يُعطي الزلابية خفة مثالية.",
   },
-  
+
   {
     slug: "eid-rice-pudding-rose",
     title: "أرز باللبن للعيد بماء الورد والقرفة حلوى بيضاء كريمية أصيلة",
