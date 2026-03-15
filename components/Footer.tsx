@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 // 1. تعريف الأنواع المسموحة للـ Modal لضمان عدم حدوث خطأ TypeScript
-type ModalType = 'privacy' | 'terms' | null;
+type ModalType = 'privacy' | 'terms' | 'ai' | null;
 
 export default function Footer() {
   const [activeModal, setActiveModal] = useState<ModalType>(null);
@@ -33,7 +33,12 @@ export default function Footer() {
     terms: {
       title: "شروط الاستخدام",
       icon: "📜",
-      content: `باستخدامك لموقع TastyRecipes، فإنك توافق على:\n\n1. المحتوى مخصص لكل للاستخدامات  .\n2. الموقع غير مسؤول عن النتائج الناتجة عن سوء تطبيق الوصفات.\n3. يسمح نسخ المحتوى مع ذكر المصدر.`
+      content: `باستخدامك لموقع TastyRecipes، فإنك توافق على:\n\n1. المحتوى مخصص لكل للاستخدامات.\n2. الموقع غير مسؤول عن النتائج الناتجة عن سوء تطبيق الوصفات.\n3. يسمح نسخ المحتوى مع ذكر المصدر.`
+    },
+    ai: {
+      title: "سياسة الشفافية والذكاء الاصطناعي",
+      icon: "🤖",
+      content: `نحن نؤمن بالشفافية الكاملة مع مستخدمينا:\n\n• نستخدم تقنيات الذذكاء الاصطناعي (AI) في توليد وتحسين محتوى الموقع بالكامل.\n• قد تحتوي بعض المعلومات على أخطاء تقنية أو مطبعية ناتجة عن المعالجة الآلية.\n• إخلاء مسؤولية: نحن غير مسؤولين عن أي سوء استخدام للمعلومات أو الوصفات الواردة، ويُنصح دائماً بالمراجعة البشرية.`
     }
   };
 
@@ -97,10 +102,16 @@ export default function Footer() {
                 شروط الاستخدام
               </button>
             </li>
+            <li>
+              <button onClick={() => toggleModal('ai')} className="group flex items-center gap-2 hover:text-orange-400 transition-all">
+                <span className="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-orange-500 transition-colors"></span>
+                سياسة الشفافية (AI)
+              </button>
+            </li>
           </ul>
         </div>
 
-        {/* القسم الثالث: تواصل معنا (إضافة جمالية) */}
+        {/* القسم الثالث: تواصل معنا */}
         <div>
            <h4 className="text-white mb-6 font-bold text-lg">تابعنا</h4>
            <div className="flex gap-4">
@@ -134,7 +145,7 @@ export default function Footer() {
               onClick={() => setActiveModal(null)}
               className="w-full bg-white text-slate-950 py-4 rounded-2xl hover:bg-orange-500 hover:text-white transition-all font-bold shadow-xl"
             >
-              فهمت ذلك
+            !!!فهمت ذلك
             </button>
           </div>
         </div>
