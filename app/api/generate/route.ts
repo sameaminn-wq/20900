@@ -1,7 +1,8 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+// الحل النهائي: نستخدم المفتاح من البيئة، أو المفتاح الاحتياطي لضمان التشغيل في StackBlitz
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "AIzaSyAt12S2n4puBJcIDyzvYF8VRPEPkL2odrs");
 
 // مصفوفة الموديلات المتاحة لتجربتها بالترتيب في حال فشل أحدها
 const MODELS_TO_TRY = [
@@ -22,14 +23,13 @@ export async function POST(req: Request) {
     }
 
     let model;
-    let lastError;
+    let lastError: any;
     let successfulModelName = "";
 
     // حلقة ذكية لاختيار الموديل الشغال تلقائياً
     for (const modelName of MODELS_TO_TRY) {
       try {
         const tempModel = genAI.getGenerativeModel({ model: modelName });
-        // محاولة بسيطة للتأكد أن الموديل مدعوم
         model = tempModel;
         successfulModelName = modelName;
         break; 
@@ -40,7 +40,9 @@ export async function POST(req: Request) {
     }
 
     if (!model) {
-        throw new Error(`تعذر العثور على موديل شغال. آخر خطأ: ${lastError?.message}`);
+        // تم الإصلاح هنا: استخدام Type Guard لتجاوز خطأ الـ Build
+        const errorMsg = lastError instanceof Error ? lastError.message : String(lastError || "Unknown Error");
+        throw new Error(`تعذر العثور على موديل شغال. آخر خطأ: ${errorMsg}`);
     }
 
     const prompt = `أنت الشيف العالمي الدكتور كمال النوري — حاصل على نجمتَي ميشلان، ودكتوراه في علوم التغذية الإكلينيكية من جامعة هارفارد، وصاحب خبرة ميدانية تمتد لأكثر من 60 عامًا في أرقى مطابخ باريس وطوكيو والقاهرة. 
