@@ -14,21 +14,18 @@ export async function POST(req: Request) {
       );
     }
 
-    // --- منطق التبديل التلقائي (Fallback) لضمان العمل ---
+    // --- منطق التبديل التلقائي المُصلح ---
     const MODELS_TO_TRY = [
-      "gemini-1.5-flash", 
-      "gemini-1.5-pro",
-      "gemini-2.0-flash-exp"
+      "gemini-1.5-flash",
+      "gemini-1.5-flash-latest",
+      "gemini-1.5-pro"
     ];
 
-    let result;
-    let lastError;
+    let responseText = "";
+    let success = false;
+    let lastError = null;
 
-    for (const modelName of MODELS_TO_TRY) {
-      try {
-        const model = genAI.getGenerativeModel({ model: modelName });
-        
-        const prompt = `أنت الشيف العالمي الدكتور كمال النوري — حاصل على نجمتَي ميشلان، ودكتوراه في علوم التغذية الإكلينيكية من جامعة هارفارد، وصاحب خبرة ميدانية تمتد لأكثر من 60 عامًا في أرقى مطابخ باريس وطوكيو والقاهرة. 
+    const prompt = `أنت الشيف العالمي   النوري — حاصل على نجمتَي ميشلان، ودكتوراه في علوم التغذية الإكلينيكية من جامعة هارفارد، وصاحب خبرة ميدانية تمتد لأكثر من 60 عامًا في أرقى مطابخ باريس وطوكيو والقاهرة. 
 
 قضيت عمرك تفهم العلاقة الدقيقة بين الغذاء والجسم، وتحول أبسط المكونات إلى وجبات شافية تُغذي الخلايا وتُسعد الروح.
 
@@ -75,25 +72,37 @@ export async function POST(req: Request) {
   "nutritionistNote": "ملاحظة الخبير الغذائي — متى تُناسب هذه الوصفة؟ من يجب أن يتجنبها؟"
 }`;
 
-        result = await model.generateContent(prompt);
-        if (result) break; // إذا نجحنا نخرج من الحلقة
+    for (const modelName of MODELS_TO_TRY) {
+      try {
+        const model = genAI.getGenerativeModel({ model: modelName });
+        // الإصلاح: يجب تنفيذ generateContent داخل المحاولة (try) لاكتشاف الفشل
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        responseText = response.text();
+        
+        if (responseText) {
+          success = true;
+          break; 
+        }
       } catch (err) {
         lastError = err;
-        continue; // جرب الموديل اللي بعده
+        console.error(`فشل الموديل ${modelName}، جاري تجربة البديل...`);
+        continue;
       }
     }
 
-    if (!result) throw lastError;
-    // ------------------------------------------------
+    if (!success) {
+      throw lastError || new Error("فشلت جميع نماذج التوليد");
+    }
+    // ---------------------------------------
 
-    const response = await result.response;
-    const text = response.text();
-
-    const cleanText = text
+    // تنظيف الاستجابة من أي backticks أو نص إضافي
+    const cleanText = responseText
       .replace(/```json\s*/gi, "")
       .replace(/```\s*/g, "")
       .trim();
 
+    // محاولة استخراج JSON من الاستجابة
     const jsonMatch = cleanText.match(/\{[\s\S]*\}/);
     if (!jsonMatch) {
       throw new Error("لم يتم العثور على JSON صالح في الاستجابة");
@@ -108,6 +117,7 @@ export async function POST(req: Request) {
     });
   } catch (error: any) {
     console.error("DEBUG_ERROR:", error); 
+
     return NextResponse.json(
       { 
         error: "فشل في التوليد", 
