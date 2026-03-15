@@ -14,14 +14,11 @@ export async function POST(req: Request) {
       );
     }
 
-    const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash",
-      generationConfig: {
-        temperature: 0.85,
-        topP: 0.95,
-        maxOutputTokens: 2048,
-      },
-    });
+    // بدلاً من gemini-1.5-flash
+const model = genAI.getGenerativeModel({ 
+  model: "gemini-1.5-flash-latest" 
+});
+     
 
     const prompt = `أنت الشيف العالمي الدكتور   — حاصل على نجمتَي ميشلان، ودكتوراه في علوم التغذية الإكلينيكية من جامعة هارفارد، وصاحب خبرة ميدانية تمتد لأكثر من 60 عامًا في أرقى مطابخ باريس وطوكيو والقاهرة. 
 
