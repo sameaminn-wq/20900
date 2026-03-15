@@ -93,15 +93,15 @@ export async function POST(req: Request) {
         "Cache-Control": "no-store",
       },
     });
-  } catch (error) {
-    console.error("Recipe generation error:", error);
+  } catch (error: any) {
+    // هذا السطر هو الأهم: سيطبع لك الخطأ القادم من جوجل كما هو
+    console.error("DEBUG_ERROR:", error); 
 
-    const isParseError = error instanceof SyntaxError;
     return NextResponse.json(
-      {
-        error: isParseError
-          ? "خطأ في معالجة الاستجابة — يرجى المحاولة مرة أخرى"
-          : "فشل في توليد الوصفة — تحقق من مفتاح API أو حاول لاحقًا",
+      { 
+        error: "فشل في التوليد", 
+        details: error.message, // أضفنا هذا السطر لنرى السبب في المتصفح
+        raw: error
       },
       { status: 500 }
     );
