@@ -393,7 +393,7 @@ export const recipes = [
   {
     slug: "classic-cinnabon-rolls",
     title: "سينابون رولز (Cinnabon): بعجينة قطنية وصوص الجبن الغني",
-    category: "dessert",
+    category: "main",
     time: 150,
     rating: 4.9,
     image: "https://images.unsplash.com/photo-1509315811345-672d83ef2fbc?q=80&w=600&auto=format&fit=crop",
@@ -504,7 +504,7 @@ export const recipes = [
   {
     slug: "perfect-pancake-fluffy",
     title: "بان كيك هش (Fluffy Pancakes): أسرار الفطور الأمريكي المثالي",
-    category: "dessert",
+    category: "fastest",
     time: 20,
     rating: 4.6,
     image: "https://images.unsplash.com/photo-1567620905732-2d1ec7bb7445?q=80&w=600&auto=format&fit=crop",
@@ -548,7 +548,7 @@ export const recipes = [
   {
     slug: "chocolate-molten-cake",
     title: "مولتن كيك (Lava Cake): سر البركان السائل في 12 دقيقة فقط",
-    category: "dessert",
+    category: "fastest",
     time: 20,
     rating: 4.9,
     image: "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?q=80&w=600&auto=format&fit=crop",
@@ -705,7 +705,7 @@ export const recipes = [
   {
     slug: "classic-chocolate-chip-cookies",
     title: "كوكيز الشوكولاتة الكلاسيكي الطري من الداخل والمقرمش من الخارج",
-    category: "cookies",
+    category: "eid",
     time: 30,
     rating: 5.0,
     image: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?q=80&w=600&auto=format&fit=crop",
@@ -739,7 +739,7 @@ export const recipes = [
   {
     slug: "soft-brown-butter-cookies",
     title: "كوكيز الزبدة البنية الطري بالملح البحري وصفة احترافية",
-    category: "cookies",
+    category: "eid",
     time: 40,
     rating: 4.9,
     image: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=600&auto=format&fit=crop",
@@ -773,7 +773,7 @@ export const recipes = [
   {
     slug: "red-velvet-cookies",
     title: "كوكيز ريد فيلفيت الأحمر بجبن الكريم وصفة مثيرة للإعجاب",
-    category: "cookies",
+    category: "eid",
     time: 35,
     rating: 4.8,
     image: "https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?q=80&w=600&auto=format&fit=crop",
@@ -808,7 +808,7 @@ export const recipes = [
   {
     slug: "oatmeal-raisin-cookies",
     title: "كوكيز الشوفان بالزبيب الكلاسيكي كوكيز صحي لذيذ ومغذٍ",
-    category: "cookies",
+    category: "eid",
     time: 28,
     rating: 4.6,
     image: "https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?q=80&w=600&auto=format&fit=crop",
@@ -843,7 +843,7 @@ export const recipes = [
   {
     slug: "peanut-butter-cookies",
     title: "كوكيز زبدة الفول السوداني الكريمي بثلاثة مكونات فقط",
-    category: "cookies",
+    category: "eid",
     time: 20,
     rating: 4.7,
     image: "https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?q=80&w=600&auto=format&fit=crop",
@@ -870,7 +870,7 @@ export const recipes = [
   {
     slug: "snickerdoodle-cinnamon-cookies",
     title: "كوكيز السناكردودل بالقرفة والسكر كوكيز أمريكي كلاسيكي مميز",
-    category: "cookies",
+    category: "eid",
     time: 30,
     rating: 4.7,
     image: "https://images.unsplash.com/photo-1568051243851-f9b136146e97?q=80&w=600&auto=format&fit=crop",
@@ -904,7 +904,7 @@ export const recipes = [
   {
     slug: "double-chocolate-cookies",
     title: "كوكيز الشوكولاتة المضاعفة الفاخر للعشاق الحقيقيين للشوكولاتة",
-    category: "cookies",
+    category: "eid",
     time: 35,
     rating: 5.0,
     image: "https://images.unsplash.com/photo-1481391319762-47dff72954d9?q=80&w=600&auto=format&fit=crop",
@@ -939,7 +939,7 @@ export const recipes = [
   {
     slug: "lemon-sugar-cookies",
     title: "كوكيز الليمون والسكر المنعش بتلوين الزجاجة وصفة مميزة",
-    category: "cookies",
+    category: "eid",
     time: 40,
     rating: 4.6,
     image: "https://images.unsplash.com/photo-1519915028121-7d3463d20b13?q=80&w=600&auto=format&fit=crop",
@@ -973,7 +973,7 @@ export const recipes = [
   {
     slug: "matcha-white-chocolate-cookies",
     title: "كوكيز الماتشا والشوكولاتة البيضاء الياباني الأنيق الفاخر",
-    category: "cookies",
+    category: "eid",
     time: 35,
     rating: 4.8,
     image: "https://images.unsplash.com/photo-1604338967601-b68f66a0a4f8?q=80&w=600&auto=format&fit=crop",
@@ -1006,7 +1006,7 @@ export const recipes = [
   {
     slug: "salted-caramel-cookies",
     title: "كوكيز الكراميل المالح الفاخر بمركز سائل لذيذ لا يُقاوم",
-    category: "cookies",
+    category: "eid",
     time: 45,
     rating: 4.9,
     image: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?q=80&w=600&auto=format&fit=crop",
@@ -1040,7 +1040,7 @@ export const recipes = [
   {
     slug: "thumbprint-jam-cookies",
     title: "كوكيز ثمبرينت بالمربى الكوكيز الكلاسيكي الجميل بالمربى الملوّن",
-    category: "cookies",
+    category: "eid",
     time: 35,
     rating: 4.6,
     image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=600&auto=format&fit=crop",
@@ -1070,7 +1070,7 @@ export const recipes = [
   {
     slug: "coconut-macaroon-cookies",
     title: "ماكارون جوز الهند الكوكيز الاستوائي بتغطية الشوكولاتة الداكنة",
-    category: "cookies",
+    category: "eid",
     time: 30,
     rating: 4.7,
     image: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=600&auto=format&fit=crop",
@@ -1101,7 +1101,7 @@ export const recipes = [
   {
     slug: "speculoos-spiced-cookies",
     title: "سبيكولوس كوكيز بهارات الكريسماس البلجيكي الأصيل",
-    category: "cookies",
+    category: "eid",
     time: 50,
     rating: 4.8,
     image: "https://images.unsplash.com/photo-1603532648955-039310d9ed75?q=80&w=600&auto=format&fit=crop",
@@ -1135,7 +1135,7 @@ export const recipes = [
   {
     slug: "pistachio-cranberry-cookies",
     title: "كوكيز الفستق الحلبي والتوت البري المجفف كوكيز احتفالي فاخر",
-    category: "cookies",
+    category: "eid",
     time: 35,
     rating: 4.7,
     image: "https://images.unsplash.com/photo-1548365328-8c6db3220e4c?q=80&w=600&auto=format&fit=crop",
@@ -1168,7 +1168,7 @@ export const recipes = [
   {
     slug: "tahini-sesame-cookies",
     title: "كوكيز الطحينة والسمسم الشرقي الأصيل بالعسل والسمسم",
-    category: "cookies",
+    category: "eid",
     time: 30,
     rating: 4.6,
     image: "https://images.unsplash.com/photo-1587462644958-7f20b1efaa8a?q=80&w=600&auto=format&fit=crop",
@@ -1201,7 +1201,7 @@ export const recipes = [
   {
     slug: "cacao-nib-espresso-cookies",
     title: "كوكيز الكاكاو والإسبريسو الفاخر كوكيز قهوة للبالغين",
-    category: "cookies",
+    category: "eid",
     time: 35,
     rating: 4.8,
     image: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?q=80&w=600&auto=format&fit=crop",
@@ -1235,7 +1235,7 @@ export const recipes = [
   {
     slug: "almond-flour-cookies",
     title: "كوكيز دقيق اللوز الصحي خالٍ من الجلوتين ومناسب للكيتو",
-    category: "cookies",
+    category: "eid",
     time: 25,
     rating: 4.6,
     image: "https://images.unsplash.com/photo-1574085733277-851d9d856a3a?q=80&w=600&auto=format&fit=crop",
@@ -1267,7 +1267,7 @@ export const recipes = [
   {
     slug: "vanilla-butter-icebox-cookies",
     title: "كوكيز الفانيليا والزبدة الثلاجي الكلاسيكي مقرمش وناعم",
-    category: "cookies",
+    category: "eid",
     time: 50,
     rating: 4.7,
     image: "https://images.unsplash.com/photo-1607083206968-13611e3d76db?q=80&w=600&auto=format&fit=crop",
@@ -4128,6 +4128,7 @@ export const recipes = [
       steps: ["السموذي الأخضر يُعطيك جرعة الفيتامينات الصباحية بطريقة سريعة ولذيذة.","تُغسل السبانخ وتُوضع في الخلاط.","تُضاف التفاحة والموزة والزنجبيل.","يُسكب ماء جوز الهند.","يُخلط حتى يصبح ناعماً.","تُضاف بذور الشيا وتُقدّم فوراً."],
       proTips: "الموزة المجمدة تُعطي قواماً أكثر كثافة وبرودة.",
     },
+
     {
       slug: "diet-shrimp-salad",
       title: "سلطة الجمبري الدايت وجبة مأكولات بحرية منخفضة السعرات",
@@ -4188,6 +4189,7 @@ export const recipes = [
       steps: ["سلطة الستيك بالروكا من أرقى وجبات الدايت التي تجمع البروتين والخضار بطريقة راقية.","يُتبّل الستيك بالملح والفلفل والزيت.","يُشوى 2-3 دقائق لكل جانب.","يُترك يرتاح 5 دقائق ثم يُقطّع شرائح رفيعة.","تُعد السلطة بالروكا والطماطم.","يُوضع الستيك فوق السلطة مع البلسمي."],
       proTips: "الستيك يجب أن يرتاح بعد الشواء لإعادة توزيع عصارته.",
     },
+
     {
       slug: "diet-oat-energy-balls",
       title: "كرات طاقة الشوفان الدايت وجبة خفيفة صحية بدون طهي",
@@ -4319,7 +4321,8 @@ export const recipes = [
       ingredients: ["كوب إيدامامي مسلوق","جزر مبشور","خيار","صلصة صويا","زيت سمسم","سمسم محمص","ليمون"],
       steps: ["الإيدامامي أحد أفضل مصادر البروتين النباتي الكامل في العالم.","يُسلق الإيدامامي ويُبرّد.","تُقطّع الجزر والخيار.","تُخلط مع الإيدامامي.","تُضاف الصويا وزيت السمسم والليمون.","يُرش السمسم المحمص ويُقدّم."],
       proTips: "الإيدامامي المجمد يُسلق في 3 دقائق فقط.",
-    },{
+    }
+    ,{
       slug: "diet-grilled-chicken-salad",
       title: "سلطة الدجاج المشوي الدايت غنية بالبروتين منخفضة السعرات",
       category: "diet",
