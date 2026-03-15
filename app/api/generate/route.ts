@@ -74,7 +74,7 @@ export async function POST(req: Request) {
     const response = await result.response;
     const text = response.text();
 
-    // تنظيف الاستجابة من أي backticks أو نص إضافي
+    // تنظيف الاستجابة من أي backticks أوو نص إضافي
     const cleanText = text
       .replace(/```json\s*/gi, "")
       .replace(/```\s*/g, "")
