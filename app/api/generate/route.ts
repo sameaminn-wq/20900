@@ -14,21 +14,19 @@ export async function POST(req: Request) {
       );
     }
 
-    // --- منطق التبديل التلقائي لضمان تجاوز خطأ 404 ---
+    // --- منطق التبديل التلقائي (Fallback) لضمان العمل ---
     const MODELS_TO_TRY = [
-      "gemini-1.5-flash",
-      "gemini-2.0-flash",
-      "gemini-1.5-flash-8b"
+      "gemini-1.5-flash", 
+      "gemini-1.5-pro",
+      "gemini-2.0-flash-exp"
     ];
 
-    let model;
     let result;
     let lastError;
 
-    // محاولة استدعاء الموديلات المتاحة
     for (const modelName of MODELS_TO_TRY) {
       try {
-        const currentModel = genAI.getGenerativeModel({ model: modelName });
+        const model = genAI.getGenerativeModel({ model: modelName });
         
         const prompt = `أنت الشيف العالمي الدكتور كمال النوري — حاصل على نجمتَي ميشلان، ودكتوراه في علوم التغذية الإكلينيكية من جامعة هارفارد، وصاحب خبرة ميدانية تمتد لأكثر من 60 عامًا في أرقى مطابخ باريس وطوكيو والقاهرة. 
 
@@ -77,17 +75,16 @@ export async function POST(req: Request) {
   "nutritionistNote": "ملاحظة الخبير الغذائي — متى تُناسب هذه الوصفة؟ من يجب أن يتجنبها؟"
 }`;
 
-        result = await currentModel.generateContent(prompt);
-        if (result) break; // إذا نجح التوليد نخرج من الحلقة
+        result = await model.generateContent(prompt);
+        if (result) break; // إذا نجحنا نخرج من الحلقة
       } catch (err) {
         lastError = err;
-        console.warn(`فشل الموديل ${modelName}، يجري تجربة الموديل التالي...`);
-        continue;
+        continue; // جرب الموديل اللي بعده
       }
     }
 
     if (!result) throw lastError;
-    // ----------------------------------------------
+    // ------------------------------------------------
 
     const response = await result.response;
     const text = response.text();
@@ -111,7 +108,6 @@ export async function POST(req: Request) {
     });
   } catch (error: any) {
     console.error("DEBUG_ERROR:", error); 
-
     return NextResponse.json(
       { 
         error: "فشل في التوليد", 
