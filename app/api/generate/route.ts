@@ -14,13 +14,29 @@ export async function POST(req: Request) {
       );
     }
 
-    // بدلاً من gemini-1.5-flash
-const model = genAI.getGenerativeModel({ 
-  model: "gemini-1.5-flash-latest" 
-});
-     
+    // --- إضافة منطق التبديل التلقائي هنا ---
+    const MODELS_TO_TRY = [
+      "gemini-1.5-flash",
+      "gemini-2.0-flash",
+      "gemini-1.5-flash-latest"
+    ];
 
-    const prompt = `أنت الشيف العالمي الدكتور   — حاصل على نجمتَي ميشلان، ودكتوراه في علوم التغذية الإكلينيكية من جامعة هارفارد، وصاحب خبرة ميدانية تمتد لأكثر من 60 عامًا في أرقى مطابخ باريس وطوكيو والقاهرة. 
+    let model;
+    let lastError;
+
+    for (const modelName of MODELS_TO_TRY) {
+      try {
+        model = genAI.getGenerativeModel({ model: modelName });
+        // نتحقق من الموديل بمحاولة تشغيله
+        break; 
+      } catch (err) {
+        lastError = err;
+        continue;
+      }
+    }
+    // ---------------------------------------
+
+    const prompt = `أنت الشيف العالمي    — حاصل على نجمتَي ميشلان، ودكتوراه في علوم التغذية الإكلينيكية من جامعة هارفارد، وصاحب خبرة ميدانية تمتد لأكثر من 60 عامًا في أرقى مطابخ باريس وطوكيو والقاهرة. 
 
 قضيت عمرك تفهم العلاقة الدقيقة بين الغذاء والجسم، وتحول أبسط المكونات إلى وجبات شافية تُغذي الخلايا وتُسعد الروح.
 
@@ -71,7 +87,7 @@ const model = genAI.getGenerativeModel({
     const response = await result.response;
     const text = response.text();
 
-    // تنظيف الاستجابة من أي backticks أوو نص إضافي
+    // تنظيف الاستجابة من أي backticks أو نص إضافي
     const cleanText = text
       .replace(/```json\s*/gi, "")
       .replace(/```\s*/g, "")
@@ -91,13 +107,12 @@ const model = genAI.getGenerativeModel({
       },
     });
   } catch (error: any) {
-    // هذا السطر هو الأهم: سيطبع لك الخطأ القادم من جوجل كما هو
     console.error("DEBUG_ERROR:", error); 
 
     return NextResponse.json(
       { 
         error: "فشل في التوليد", 
-        details: error.message, // أضفنا هذا السطر لنرى السبب في المتصفح
+        details: error.message,
         raw: error
       },
       { status: 500 }
