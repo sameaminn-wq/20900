@@ -1,0 +1,59 @@
+"use client";
+import { useState } from "react";
+import { Sparkles, Loader2 } from "lucide-react";
+
+export default function AiGenerator() {
+  const [ingredients, setIngredients] = useState("");
+  const [recipe, setRecipe] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+
+  const generate = async () => {
+    setLoading(true);
+    const res = await fetch("/api/generate", {
+      method: "POST",
+      body: JSON.stringify({ ingredients }),
+    });
+    const data = await res.json();
+    setRecipe(data);
+    setLoading(false);
+  };
+
+  return (
+    <div className="bg-white p-6 rounded-3xl shadow-lg border-2 border-green-50">
+      <h2 className="text-xl font-bold mb-4 flex items-center gap-2 text-green-700">
+        <Sparkles size={24} className="text-orange-400" /> مولد الوصفات الذكي
+      </h2>
+      <textarea 
+        className="w-full p-4 border rounded-2xl bg-gray-50 focus:ring-2 focus:ring-green-500 outline-none"
+        placeholder="مثلاً: شوفان، موز، زبادي..."
+        value={ingredients}
+        onChange={(e) => setIngredients(e.target.value)}
+      />
+      <button 
+        onClick={generate}
+        disabled={loading || !ingredients}
+        className="w-full mt-4 bg-green-600 text-white py-3 rounded-xl font-bold hover:bg-green-700 transition-all flex justify-center items-center gap-2"
+      >
+        {loading ? <Loader2 className="animate-spin" /> : "ابتكر وصفتي الآن 🚀"}
+      </button>
+
+      {recipe && (
+        <div className="mt-8 border-t pt-6 animate-in fade-in duration-700">
+          <h3 className="text-2xl font-bold text-gray-800 mb-2">{recipe.title}</h3>
+          <p className="text-sm text-gray-500 mb-4 italic">{recipe.description}</p>
+          <div className="bg-orange-50 p-4 rounded-xl mb-4 text-orange-800 font-bold">
+            🔥 السعرات الحرارية: {recipe.calories} سعرة
+          </div>
+          <ul className="space-y-3">
+            {recipe.steps.map((step: string, i: number) => (
+              <li key={i} className="flex gap-3">
+                <span className="bg-green-100 text-green-700 w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm">{i+1}</span>
+                <p className="text-gray-700 leading-relaxed">{step}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
