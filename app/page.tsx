@@ -33,6 +33,7 @@ export default function Home() {
           <div className="hidden lg:block relative">
              {/* صورة فخمة تليق بموقع Luxe */}
              <div className="relative rounded-[3rem] overflow-hidden border-[12px] border-slate-800 shadow-2xl transform rotate-2">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
                   src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1000&auto=format&fit=crop" 
                   alt="Luxe Cooking" 
@@ -48,7 +49,7 @@ export default function Home() {
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl font-black text-slate-800 mb-4">ابتكار الوصفات بالذكاء الاصطناعي</h2>
           <p className="text-slate-500 max-w-2xl mx-auto">
-            توقف عن الحيرة! أخبرنا بالمكونات المتوفرة لديك وسيقوم الشيف "كمال النوري" بتصميم وصفة صحية وفخمة لك في ثوانٍ.
+            توقف عن الحيرة! أخبرنا بالمكونات المتوفرة لديك وسيقوم الشيف &quot;العالمي&quot; بتصميم وصفة صحية وفخمة لك في ثوانٍ.
           </p>
         </div>
         <AiGenerator />
