@@ -28,7 +28,7 @@ export default function Footer() {
     privacy: {
       title: "سياسة الخصوصية والكوكيز",
       icon: "🔒",
-      content: `نحن في TastyRecipes نستخدم ملفات تعريف الارتباط (Cookies) لتحسين تجربتك.\n\n• نستخدم الكوكيز لتذكر تفضيلاتك وتقديم محتوى مخصص.\n• نستخدم خدمات طرف ثالث مثل Google AdSense لعرض الإعلانات.\n• يمكنك دائماً تعطيل الكوكيز من إعدادات متصفحك.`
+      content: `نحن في TastyRecipes نستخدم ملفات تعريف الارتباط (Cookies) لتحسين تجربتك.\n\n• !نستخدم الكوكيز لتذكر تفضيلاتك وتقديم محتوى مخصص.\n• نستخدم خدمات طرف ثالث مثل Google AdSense لعرض الإعلانات.\n• يمكنك دائماً تعطيل الكوكيز من إعدادات متصفحك.`
     },
     terms: {
       title: "شروط الاستخدام",
@@ -124,7 +124,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-slate-900/50 text-center py-8 text-[15px] uppercase tracking-[0.2em] text-gray-600">
+      <div className="border-t border-slate-900/50 text-center py-8 text-[12px] uppercase tracking-[0.2em] text-gray-600">
         © 2026 TastyRecipes - صُنع بكل ❤️ لعشاق الطبخ
       </div>
 

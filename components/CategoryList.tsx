@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { recipes } from "@/data/recipes";
 import RecipeCard from "@/components/RecipeCard";
 
@@ -8,31 +8,39 @@ export default function CategoriesPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const categories = ["الكل", ...Array.from(new Set(recipes.map(r => r.category)))];
+  // 1. استخراج التصنيفات مع حماية كاملة من القيم الفارغة
+  const categories = [
+    "الكل", 
+    ...Array.from(new Set(recipes.map(r => r?.category).filter((cat): cat is string => !!cat)))
+  ];
 
-  // محاكاة تأثير التحميل عند تغيير التصنيف
+  // 2. تصفية الوصفات مع التأكد من وجود الكائن recipe
+  const filteredRecipes = recipes.filter((recipe) => {
+    if (!recipe) return false; // تجاهل أي عنصر فارغ
+
+    const matchesCategory = activeCategory === "الكل" || recipe.category === activeCategory;
+    const matchesSearch = recipe.title?.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    return matchesCategory && matchesSearch;
+  });
+
   const handleCategoryChange = (cat: string) => {
     setIsLoading(true);
     setActiveCategory(cat);
     
-    // تأخير بسيط لمدة 600ms لإظهار تأثير التحميل بوضوح
     setTimeout(() => {
       setIsLoading(false);
     }, 600);
   };
 
-  const filteredRecipes = recipes.filter((recipe) => {
-    const matchesCategory = activeCategory === "الكل" || recipe.category === activeCategory;
-    const matchesSearch = recipe.title.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
-
   return (
     <main className="max-w-7xl mx-auto px-6 py-12 min-h-screen" dir="rtl">
       
-      {/* قسم البحث (كما هو سابقاً) */}
+      {/* قسم البحث */}
       <div className="flex flex-col items-center mb-16 space-y-6">
-        <h1 className="text-4xl font-black text-slate-900">تصفح <span className="text-orange-500">الوصفات</span></h1>
+        <h1 className="text-4xl font-black text-slate-900">
+          تصفح <span className="text-orange-500">الوصفات</span>
+        </h1>
         <input 
           type="text"
           placeholder="ابحث عن اسم الوصفة..."
@@ -56,14 +64,14 @@ export default function CategoriesPage() {
         ))}
       </div>
 
-      {/* عرض النتائج أو الهياكل (Skeletons) */}
+      {/* عرض النتائج - تم إضافة علامة ! لتخطي خطأ الـ Build */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {isLoading ? (
-          // عرض 6 بطاقات تحميل وهمية
           Array.from({ length: 6 }).map((_, i) => <RecipeSkeleton key={i} />)
         ) : (
           filteredRecipes.map((recipe) => (
-            <RecipeCard key={recipe.slug} recipe={recipe} />
+            // استخدام علامة ! هنا يخبر TypeScript أننا نضمن وجود القيمة
+            <RecipeCard key={recipe!.slug} recipe={recipe!} />
           ))
         )}
       </div>
@@ -71,7 +79,7 @@ export default function CategoriesPage() {
   );
 }
 
-// مكون هيكل التحميل (Skeleton Component)
+// مكون هيكل التحميل
 function RecipeSkeleton() {
   return (
     <div className="bg-slate-50 border border-slate-100 rounded-[2rem] overflow-hidden animate-pulse">
