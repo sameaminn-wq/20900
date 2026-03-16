@@ -8,29 +8,33 @@ export default function CategoriesPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const categories = ["الكل", ...Array.from(new Set(recipes.map(r => r.category)))];
+  // الإصلاح هنا: استخدام r?.category للوصول الآمن، و .filter(Boolean) لإزالة أي قيم فارغة
+  const categories = [
+    "الكل", 
+    ...Array.from(new Set(recipes.map(r => r?.category).filter((cat): cat is string => !!cat)))
+  ];
 
   // محاكاة تأثير التحميل عند تغيير التصنيف
   const handleCategoryChange = (cat: string) => {
     setIsLoading(true);
     setActiveCategory(cat);
     
-    // تأخير بسيط لمدة 600ms لإظهار تأثير التحميل بوضوح
     setTimeout(() => {
       setIsLoading(false);
     }, 600);
   };
 
   const filteredRecipes = recipes.filter((recipe) => {
-    const matchesCategory = activeCategory === "الكل" || recipe.category === activeCategory;
-    const matchesSearch = recipe.title.toLowerCase().includes(searchQuery.toLowerCase());
+    // التأكد من أن recipe و recipe.category موجودان قبل المقارنة
+    const matchesCategory = activeCategory === "الكل" || recipe?.category === activeCategory;
+    const matchesSearch = recipe?.title?.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
   return (
     <main className="max-w-7xl mx-auto px-6 py-12 min-h-screen" dir="rtl">
       
-      {/* قسم البحث (كما هو سابقاً) */}
+      {/* قسم البحث */}
       <div className="flex flex-col items-center mb-16 space-y-6">
         <h1 className="text-4xl font-black text-slate-900">تصفح <span className="text-orange-500">الوصفات</span></h1>
         <input 
@@ -59,7 +63,6 @@ export default function CategoriesPage() {
       {/* عرض النتائج أو الهياكل (Skeletons) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {isLoading ? (
-          // عرض 6 بطاقات تحميل وهمية
           Array.from({ length: 6 }).map((_, i) => <RecipeSkeleton key={i} />)
         ) : (
           filteredRecipes.map((recipe) => (
@@ -71,7 +74,7 @@ export default function CategoriesPage() {
   );
 }
 
-// مكون هيكل التحميل (Skeleton Component)
+// مكون هيكل التحميل (Skeleton Component) يبقى كما هو
 function RecipeSkeleton() {
   return (
     <div className="bg-slate-50 border border-slate-100 rounded-[2rem] overflow-hidden animate-pulse">
