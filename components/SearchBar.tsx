@@ -20,18 +20,21 @@ export default function SearchBar() {
   return (
     <form onSubmit={handleSearch} className="flex gap-3 w-full max-w-lg">
       <input
-        type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="ابحث عن وصفة (مثلاً: كحك العيد)..."
-        className="flex-1 border p-3 rounded-lg text-right outline-none focus:border-orange-500 transition-colors"
-        dir="rtl"
-      />
-      <button
-        type="submit"
-        className="bg-orange-500 hover:bg-orange-600 text-black px-6 rounded-lg transition-colors font-bold"
-      >
-        !بحث
+  type="text"
+  value={query}
+  onChange={(e) => setQuery(e.target.value)}
+  placeholder="ابحث عن وصفة (مثلاً: كحك العيد)..."
+  /* أضفنا text-gray-900 لضمان ظهور النص باللون الأسود/الرمادي الغامق */
+  className="flex-1 p-3 rounded-lg text-right text-gray-900 bg-white border-none outline-none focus:ring-2 focus:ring-orange-500 transition-all placeholder:text-gray-400"
+  dir="rtl"
+/>
+<button
+  type="submit"
+  /* غيرت النص ليكون باللون الأبيض text-white ليتناسب مع الزر البرتقالي في الصورة */
+  className="bg-orange-600 hover:bg-orange-700 text-white px-8 rounded-lg transition-all font-bold active:scale-95"
+>
+  بحث
+
       </button>
     </form>
   )
