@@ -124,7 +124,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-slate-900/50 text-center py-8 text-[15px] uppercase tracking-[0.2em] text-gray-600">
+      <div className="border-t border-slate-900/50 text-center py-8 text-[12px] uppercase tracking-[0.2em] text-gray-600">
         © 2026 TastyRecipes - صُنع بكل ❤️ لعشاق الطبخ
       </div>
 
