@@ -35,6 +35,11 @@ export default function Footer() {
       icon: "📜",
       content: `باستخدامك لموقع TastyRecipes، فإنك توافق على:\n\n1. المحتوى مخصص لكل للاستخدامات.\n2. الموقع غير مسؤول عن النتائج الناتجة عن سوء تطبيق الوصفات.\n3. يسمح نسخ المحتوى مع ذكر المصدر.`
     },
+    contact: {
+      title: " التواصل",
+      icon: "!",
+      content: ` sameaminn@gmail.com .`
+    },
     ai: {
       title: "سياسة الشفافية والذكاء الاصطناعي",
       icon: "🤖",
