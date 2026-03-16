@@ -21,7 +21,7 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-// 2. توليد البيانات الوصفية (SEO) - لجعل جوجل يقرأ كل صفحة بشكل فريد
+// 2. توليد البيانات الوصفية (SEO)
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const recipe = getRecipe(slug) as Recipe;
@@ -38,13 +38,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-// 3. بناء الصفحات مسبقاً (Static Site Generation) - لسرعة خارقة وأرشفة شاملة
+// 3. بناء الصفحات مسبقاً - تم الإصلاح هنا لتخطي خطأ 'possibly undefined'
 export async function generateStaticParams() {
-  return recipes.map((recipe) => ({
-    slug: recipe.slug,
-  }));
+  if (!recipes) return [];
+
+  return recipes
+    .filter((recipe) => recipe && recipe.slug) // التأكد من وجود الوصفة والـ slug
+    .map((recipe) => ({
+      slug: recipe!.slug, // علامة ! تؤكد لـ TypeScript أن القيمة موجودة
+    }));
 }
 
+// 4. المكون الأساسي للصفحة
 export default async function RecipePage({ params }: PageProps) {
   const { slug } = await params;
   const recipe = getRecipe(slug) as Recipe;
@@ -54,7 +59,7 @@ export default async function RecipePage({ params }: PageProps) {
   return (
     <article className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16" dir="rtl">
       
-      {/* مسار التنقل - متجاوب */}
+      {/* مسار التنقل */}
       <div className="mb-6 overflow-x-auto whitespace-nowrap pb-2">
         <Breadcrumbs title={recipe.title} />
       </div>
@@ -72,25 +77,21 @@ export default async function RecipePage({ params }: PageProps) {
           <span className="bg-yellow-50 text-yellow-700 px-4 py-2 rounded-xl text-sm md:text-base font-bold flex items-center gap-2">
             ⭐ {recipe.rating || "5.0"}
           </span>
-          <span className="hidden sm:inline-flex bg-green-50 text-green-700 px-4 py-2 rounded-xl text-sm font-bold items-center gap-2">
-            ✅ وصفة موثوقة
-          </span>
         </div>
       </header>
 
-      {/* صورة الوصفة - متجاوبة مع كل الشاشات */}
-      <div className="relative w-full aspect-video md:aspect-[21/9] rounded-[1.5rem] md:rounded-[3rem] overflow-hidden shadow-xl mb-10 md:mb-16">
+      {/* صورة الوصفة */}
+      <div className="relative w-full aspect-video md:aspect-[21/9] rounded-[1.5rem] md:rounded-[3rem] overflow-hidden shadow-xl mb-10 md:mb-16 border-8 border-white">
         <img 
           src={recipe.image} 
           className="w-full h-full object-cover" 
           alt={recipe.title}
-          loading="lazy"
         />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
         
-        {/* قسم المكونات - يظهر أولاً في الجوال أو بجانب المحتوى في الشاشات الكبيرة */}
+        {/* قسم المقادير */}
         <aside className="lg:col-span-4 lg:order-1">
           <div className="bg-slate-50 p-6 md:p-8 rounded-[2rem] border border-slate-100 sticky top-6">
             <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
@@ -108,7 +109,7 @@ export default async function RecipePage({ params }: PageProps) {
           </div>
         </aside>
 
-        {/* قسم التحضير */}
+        {/* قسم طريقة التحضير */}
         <main className="lg:col-span-8 lg:order-2">
           <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-8 flex items-center gap-3">
             <span className="bg-slate-900 text-white w-8 h-8 rounded-lg flex items-center justify-center text-lg">👨‍🍳</span> 
@@ -131,13 +132,11 @@ export default async function RecipePage({ params }: PageProps) {
         </main>
       </div>
 
-      {/* قسم المشاركة والوصفات ذات الصلة */}
       <div className="mt-12 space-y-12">
         <ShareButtons title={recipe.title} />
         <RelatedRecipes currentSlug={recipe.slug} />
       </div>
 
-      {/* التذييل */}
       <footer className="mt-16 pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-center">
         <p className="text-slate-400 text-sm italic">TastyRecipes 2026 - جميع الحقوق محفوظة</p>
         <button className="w-full sm:w-auto bg-slate-900 text-white px-8 py-3 rounded-xl font-bold active:scale-95 transition-transform">
@@ -145,7 +144,7 @@ export default async function RecipePage({ params }: PageProps) {
         </button>
       </footer>
 
-      {/* البيانات المنظمة - Schema Markup */}
+      {/* Schema Markup */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
