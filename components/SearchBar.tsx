@@ -29,7 +29,7 @@ export default function SearchBar() {
       />
       <button
         type="submit"
-        className="bg-orange-500 hover:bg-orange-600 text-gray-900 px-6 rounded-lg transition-colors font-bold"
+        className="bg-orange-500 hover:bg-orange-600 text-black px-6 rounded-lg transition-colors font-bold"
       >
         بحث
       </button>
