@@ -6,7 +6,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://tastyrecipess.vercel.app"; 
 
   // 1. تعريفات الروابط الثابتة
-  // ملاحظة: تأكد أن مجلد الـ categories موجود فعلياً في ملفاتك، إذا لم يكن موجوداً احذفه من المصفوفة
   const staticRoutes: MetadataRoute.Sitemap = ["", "/diet", "/articles", "/eid"].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
@@ -14,13 +13,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: route === "" ? 1 : 0.8,
   }));
 
-  // 2. إنشاء روابط الوصفات تلقائياً
-  const recipeRoutes: MetadataRoute.Sitemap = recipes.map((recipe) => ({
-    url: `${baseUrl}/recipes/${recipe.slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly',
-    priority: 0.6,
-  }));
+  // 2. إنشاء روابط الوصفات تلقائياً (تمت إضافة الإصلاح هنا)
+  const recipeRoutes: MetadataRoute.Sitemap = (recipes || [])
+    .filter((recipe) => recipe && recipe.slug) // سطر الأمان: تجاهل أي وصفة فارغة أو بدون slug
+    .map((recipe) => ({
+      url: `${baseUrl}/recipes/${recipe.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    }));
 
   return [...staticRoutes, ...recipeRoutes];
 }
