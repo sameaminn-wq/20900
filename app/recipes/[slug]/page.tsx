@@ -1,10 +1,12 @@
+import { recipes } from "@/data/recipes"; 
 import { getRecipe } from "@/lib/db";
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ShareButtons from "@/components/ShareButtons";
-import RelatedRecipes from "@/components/RelatedRecipes"; // استيراد المكون الجديد
+import RelatedRecipes from "@/components/RelatedRecipes";
+import { Metadata } from 'next';
 
-// 1. تعريف واجهة لبيانات الوصفة (Interface)
+// 1. تعريف واجهات البيانات
 interface Recipe {
   slug: string;
   title: string;
@@ -15,93 +17,111 @@ interface Recipe {
   rating?: string | number;
 }
 
-// 2. تعريف واجهة البارامترات (Next.js 15+)
 interface PageProps {
-  params: Promise<{
-    slug: string;
-  }>;
+  params: Promise<{ slug: string }>;
+}
+
+// 2. توليد البيانات الوصفية (SEO) - لجعل جوجل يقرأ كل صفحة بشكل فريد
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const recipe = getRecipe(slug) as Recipe;
+
+  if (!recipe) return { title: "وصفة غير موجودة" };
+
+  return {
+    title: `${recipe.title} - طريقة التحضير | TastyRecipes`,
+    description: `تعرفي على أسهل طريقة لتحضير ${recipe.title} بمكونات دقيقة. الوقت: ${recipe.time} دقيقة.`,
+    openGraph: {
+      title: recipe.title,
+      images: [recipe.image],
+    },
+  };
+}
+
+// 3. بناء الصفحات مسبقاً (Static Site Generation) - لسرعة خارقة وأرشفة شاملة
+export async function generateStaticParams() {
+  return recipes.map((recipe) => ({
+    slug: recipe.slug,
+  }));
 }
 
 export default async function RecipePage({ params }: PageProps) {
-  
-  // فك تشفير البارامترات
   const { slug } = await params;
-
-  // الحصول على الوصفة
   const recipe = getRecipe(slug) as Recipe;
 
-  // 4. التحقق من وجود الوصفة
-  if (!recipe) {
-    notFound(); 
-  }
+  if (!recipe) notFound();
 
   return (
-    <article className="max-w-5xl mx-auto px-4 sm:px-6 py-6 md:py-16" dir="rtl">
+    <article className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16" dir="rtl">
       
-      {/* --- إضافة مسار التنقل هنا قبل رأس الصفحة --- */}
-      <Breadcrumbs title={recipe.title} />
+      {/* مسار التنقل - متجاوب */}
+      <div className="mb-6 overflow-x-auto whitespace-nowrap pb-2">
+        <Breadcrumbs title={recipe.title} />
+      </div>
 
-      {/* رأس الصفحة - Responsive Typography */}
-      <header className="text-center md:text-right mb-10 md:mb-16">
-        <h1 className="text-3xl md:text-6xl font-black text-slate-900 mb-6 leading-tight tracking-tight">
+      {/* رأس الصفحة */}
+      <header className="text-right mb-8 md:mb-14">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl font-black text-slate-900 mb-6 leading-[1.2]">
           {recipe.title}
         </h1>
-        <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-slate-600">
-          <span className="bg-orange-100 text-orange-700 px-5 py-2 rounded-2xl text-sm md:text-base font-bold flex items-center gap-2 shadow-sm">
+        
+        <div className="flex flex-wrap gap-3 md:gap-4">
+          <span className="bg-orange-100 text-orange-700 px-4 py-2 rounded-xl text-sm md:text-base font-bold flex items-center gap-2">
             ⏱ {recipe.time} دقيقة
           </span>
-          <span className="bg-yellow-50 text-yellow-700 px-5 py-2 rounded-2xl text-sm md:text-base font-bold flex items-center gap-2 shadow-sm">
+          <span className="bg-yellow-50 text-yellow-700 px-4 py-2 rounded-xl text-sm md:text-base font-bold flex items-center gap-2">
             ⭐ {recipe.rating || "5.0"}
           </span>
-          <span className="text-sm font-medium text-slate-400 border-r border-slate-200 pr-4 hidden md:block">
-            وصفة موثوقة من TastyRecipes ✅
+          <span className="hidden sm:inline-flex bg-green-50 text-green-700 px-4 py-2 rounded-xl text-sm font-bold items-center gap-2">
+            ✅ وصفة موثوقة
           </span>
         </div>
       </header>
 
-      {/* صورة الوصفة - احترافية ومتجاوبة */}
-      <div className="relative aspect-video md:aspect-[21/9] w-full overflow-hidden rounded-[2.5rem] shadow-2xl shadow-orange-100/50 mb-12 md:mb-20 border-8 border-white">
+      {/* صورة الوصفة - متجاوبة مع كل الشاشات */}
+      <div className="relative w-full aspect-video md:aspect-[21/9] rounded-[1.5rem] md:rounded-[3rem] overflow-hidden shadow-xl mb-10 md:mb-16">
         <img 
           src={recipe.image} 
-          className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105" 
+          className="w-full h-full object-cover" 
           alt={recipe.title}
+          loading="lazy"
         />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
         
-        {/* قسم المكونات - Sidebar ذكي */}
-        <aside className="lg:col-span-4 order-2 lg:order-1">
-          <div className="bg-slate-50 p-8 md:p-10 rounded-[2.5rem] border border-slate-100 lg:sticky lg:top-24 shadow-sm">
-            <h2 className="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-3">
-              <span className="bg-orange-500 text-white w-10 h-10 rounded-xl flex items-center justify-center text-xl shadow-lg shadow-orange-200">🛒</span> 
-              المكونات
+        {/* قسم المكونات - يظهر أولاً في الجوال أو بجانب المحتوى في الشاشات الكبيرة */}
+        <aside className="lg:col-span-4 lg:order-1">
+          <div className="bg-slate-50 p-6 md:p-8 rounded-[2rem] border border-slate-100 sticky top-6">
+            <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+              <span className="bg-orange-500 text-white w-8 h-8 rounded-lg flex items-center justify-center text-lg">🛒</span> 
+              المقادير
             </h2>
-            <ul className="space-y-5">
-              {recipe.ingredients.map((ingredient, index) => (
-                <li key={index} className="flex items-start gap-4 text-slate-700 text-lg md:text-xl leading-relaxed border-b border-slate-200/50 pb-3 last:border-0">
-                  <span className="w-2.5 h-2.5 rounded-full bg-orange-400 mt-2.5 shrink-0"></span>
-                  {ingredient}
+            <ul className="space-y-4">
+              {recipe.ingredients.map((item, i) => (
+                <li key={i} className="flex items-start gap-3 text-slate-700 text-base md:text-lg pb-3 border-b border-slate-200 last:border-0">
+                  <div className="w-2 h-2 rounded-full bg-orange-400 mt-2.5 shrink-0" />
+                  {item}
                 </li>
               ))}
             </ul>
           </div>
         </aside>
 
-        {/* قسم طريقة التحضير - المحتوى الأساسي */}
-        <main className="lg:col-span-8 order-1 lg:order-2">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-10 flex items-center gap-3">
-            <span className="bg-slate-900 text-white w-10 h-10 rounded-xl flex items-center justify-center text-xl shadow-lg">👨‍🍳</span> 
-            طريقة التحضير بالتفصيل
+        {/* قسم التحضير */}
+        <main className="lg:col-span-8 lg:order-2">
+          <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-8 flex items-center gap-3">
+            <span className="bg-slate-900 text-white w-8 h-8 rounded-lg flex items-center justify-center text-lg">👨‍🍳</span> 
+            طريقة العمل
           </h2>
-          <div className="space-y-10">
-            {recipe.steps.map((step, index) => (
-              <div key={index} className="flex gap-6 group">
-                <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center font-black text-xl shadow-xl transition-all duration-300 group-hover:bg-orange-600 group-hover:scale-110">
-                  {index + 1}
+          <div className="space-y-8">
+            {recipe.steps.map((step, i) => (
+              <div key={i} className="flex gap-4 md:gap-6 group">
+                <div className="shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-lg md:text-xl">
+                  {i + 1}
                 </div>
-                <div className="pt-2">
-                  <p className="text-slate-700 leading-extra-loose text-lg md:text-2xl font-medium">
+                <div className="flex-1">
+                  <p className="text-slate-700 text-lg md:text-xl leading-[1.8] md:leading-loose">
                     {step}
                   </p>
                 </div>
@@ -109,24 +129,23 @@ export default async function RecipePage({ params }: PageProps) {
             ))}
           </div>
         </main>
-
       </div>
 
-      {/* أزرار المشاركة */}
-      <ShareButtons title={recipe.title} />
+      {/* قسم المشاركة والوصفات ذات الصلة */}
+      <div className="mt-12 space-y-12">
+        <ShareButtons title={recipe.title} />
+        <RelatedRecipes currentSlug={recipe.slug} />
+      </div>
 
-      {/* إضافة قسم الوصفات ذات الصلة هنا */}
-      <RelatedRecipes currentSlug={recipe.slug} />
-      
-      {/* تذييل الوصفة */}
-      <footer className="mt-20 pt-10 border-t border-slate-100 flex flex-col md:flex-row items-center justify-between gap-6">
-        <p className="text-slate-400 text-sm italic">تمت مراجعة هذه الوصفة من قبل فريق TastyRecipes لعام 2026</p>
-        <button className="bg-slate-900 text-white px-8 py-3 rounded-2xl font-bold hover:bg-orange-600 transition-all">
+      {/* التذييل */}
+      <footer className="mt-16 pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-center">
+        <p className="text-slate-400 text-sm italic">TastyRecipes 2026 - جميع الحقوق محفوظة</p>
+        <button className="w-full sm:w-auto bg-slate-900 text-white px-8 py-3 rounded-xl font-bold active:scale-95 transition-transform">
           طباعة الوصفة 🖨️
         </button>
       </footer>
 
-      {/* --- إضافة البيانات المنظمة لـ SEO --- */}
+      {/* البيانات المنظمة - Schema Markup */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -135,24 +154,8 @@ export default async function RecipePage({ params }: PageProps) {
             "@type": "Recipe",
             "name": recipe.title,
             "image": [recipe.image],
-            "author": {
-              "@type": "Organization",
-              "name": "TastyRecipes"
-            },
-            "datePublished": "2026-03-14",
-            "description": `طريقة تحضير ${recipe.title} بخطوات! سهلة ومقادير دقيقة ومجربة.`,
-            "prepTime": `PT${recipe.time}M`,
-            "totalTime": `PT${recipe.time}M`,
             "recipeIngredient": recipe.ingredients,
-            "recipeInstructions": recipe.steps.map((step: any) => ({
-              "@type": "HowToStep",
-              "text": step
-            })),
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": recipe.rating || "5",
-              "reviewCount": "24"
-            }
+            "recipeInstructions": recipe.steps.map(s => ({ "@type": "HowToStep", "text": s }))
           })
         }}
       />
