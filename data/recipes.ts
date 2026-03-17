@@ -19766,7 +19766,7 @@ export const recipes = [
         category: "eid",
         time: 90,
         rating: 5.0,
-        image: "https://images.unsplash.com/photo-1604147706283-d7119b5b822c?q=80&w=600&auto=format&fit=crop",
+        image: "https://cdn.pixabay.com/photo/2020/05/11/15/06/food-5158702_1280.jpg",
         description: "وصفة بقلاوة العيد المنزلية بالفستق والجوز وشراب القطر حلويات العيد الأصيلة التي تُسعد كل ضيف.",
         ingredients: [
           "500 جرام عجينة فيلو",
@@ -19793,7 +19793,7 @@ export const recipes = [
         category: "eid",
         time: 40,
         rating: 4.9,
-        image: "https://images.unsplash.com/photo-1492683962949-6b3de2a1bc32?q=80&w=600&auto=format&fit=crop",
+        image: "https://cdn.pixabay.com/photo/2014/10/08/21/45/rice-pudding-480823_1280.jpg",
         description: "وصفة مهلبية الأرز للعيد الحلوى العربية الكلاسيكية البيضاء بالحليب وماء الورد والفستق حلوى العيد المثالية.",
         ingredients: [
           "ليتر حليب كامل الدسم",
@@ -19802,6 +19802,7 @@ export const recipes = [
           "ملعقة ماء ورد",
           "نصف ملعقة فانيليا",
           "فستق حلبي مطحون",
+          "لمسة مربي احمر",
           "قرفة للزينة",
         ],
         steps: [
@@ -19820,7 +19821,7 @@ export const recipes = [
         category: "eid",
         time: 40,
         rating: 4.8,
-        image: "https://images.unsplash.com/photo-1496116218417-1a781b1c416c?q=80&w=601&auto=format&fit=crop",
+        image: "https://images.pexels.com/photos/32986492/pexels-photo-32986492.jpeg?_gl=1*s053se*_ga*MTEwMzg0NDg0NC4xNzczNzYzMDQz*_ga_8JE65Q40S6*czE3NzM3NjMwNDMkbzEkZzEkdDE3NzM3NjMwNjUkajM4JGwwJGgw",
         description: "وصفة كفتة الخروف على الفحم للعيد مع البهارات العربية طبق شعبي فاخر لا يخطئ على مائدة العيد.",
         ingredients: [
           "500 جرام لحم خروف مفروم ناعم",
@@ -19847,7 +19848,7 @@ export const recipes = [
         category: "eid",
         time: 60,
         rating: 4.9,
-        image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?q=80&w=602&auto=format&fit=crop",
+        image: "https://images.pexels.com/photos/10395259/pexels-photo-10395259.jpeg?_gl=1*9linel*_ga*MTEwMzg0NDg0NC4xNzczNzYzMDQz*_ga_8JE65Q40S6*czE3NzM3NjMwNDMkbzEkZzEkdDE3NzM3NjMxNzUkajM2JGwwJGgw",
         description: "وصفة بسبوسة العيد بالسميد والقشطة وشراب القطر حلوى العيد المصرية الشامية المشهورة لا تقاوم.",
         ingredients: [
           "2 كوب سميد خشن",
@@ -19874,7 +19875,7 @@ export const recipes = [
         category: "main",
         time: 50,
         rating: 4.9,
-        image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=603&auto=format&fit=crop",
+        image: "https://images.pexels.com/photos/32986469/pexels-photo-32986469.jpeg?_gl=1*n99t3w*_ga*MTEwMzg0NDg0NC4xNzczNzYzMDQz*_ga_8JE65Q40S6*czE3NzM3NjMwNDMkbzEkZzEkdDE3NzM3NjM1ODkkajYwJGwwJGgw",
         description: "لمحبي التنويع! الكوسة المحشوة باللحم المفروم والمطهوة في صوص الزبادي الدافئ. وجبة غنية بالبروتين وقليلة الكربوهيدرات.",
         ingredients: [
           "كيلو كوسة صغيرة (محفورة)",
@@ -19896,7 +19897,7 @@ export const recipes = [
         category: "fastest",
         time: 10,
         rating: 4.5,
-        image: "https://images.unsplash.com/photo-1510629595363-601216ee89f8?q=80&w=600&auto=format&fit=crop",
+        image: "https://images.unsplash.com/photo--?q=80&w=&auto=format&fit=crop",
         description: "عندما تكونين على عجلة من أمرك. أومليت هش غني بالألوان والفيتامينات، يُحضر في دقائق معدودة.",
         ingredients: [
           "3 بيضات فريش، ملعقة كبيرة حليب",
@@ -24893,7 +24894,7 @@ export const recipes = [
           category: "eid",
           time: 150,
           rating: 5.0,
-          image: "https://images.unsplash.com/photo-1612041285324-f7b244791696?q=80&w=800",
+          image: "https://cdn.pixabay.com/photo/2018/07/02/16/45/butter-3511856_1280.jpg",
           description: "سر كعك العيد 'الناعم' برائحة المحلب والسمن المقدوح، محشو بالعجمية العسلية لضيافة ملكية في صباح العيد.",
           keywords: ["كعك العيد", "كعك ناعم", "حلويات العيد", "عجمية", "ضيافة مصرية"],
           ingredients: [
