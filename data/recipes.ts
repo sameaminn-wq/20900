@@ -14187,7 +14187,7 @@ export const recipes = [
     {
       slug: "diet-cauliflower-rice",
       title: "أرز القرنبيط الدايت بديل الأرز منخفض الكربوهيدرات",
-      category: "diet",
+      category: "diet","eid"
       time: 15,
       rating: 4.4,
       image: "https://images.unsplash.com/photo-1645696301019-35adcc18fc9b?q=80&w=600",
