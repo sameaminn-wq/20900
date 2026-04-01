@@ -2,7 +2,7 @@ import { getCategory } from "@/lib/db";
 import RecipeCard from "@/components/RecipeCard";
 
 export default function Eid() {
-  const recipes = getCategory("eid");
+  const recipes = getCategory("fast");
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12" dir="rtl">

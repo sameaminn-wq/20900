@@ -31,8 +31,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
       
       {/* 2. أدوات تتبع جوجل (توضع في الـ Head تلقائياً عبر Next.js) */}
       {/* استبدل GTM-XXXXXXX و G-XXXXXXXXXX بالأكواد الخاصة بك من حسابات جوجل */}
-      <GoogleTagManager gtmId="GTM-XXXXXXX" />
-      <GoogleAnalytics gaId="G-XXXXXXXXXX" />
+      <GoogleTagManager gtmId="GTM-N7VWW5NK" />
+      <GoogleAnalytics gaId="G-8D5ZLNDDJV" />
 
       <head>
         {/* 3. كود جوجل أدسينس (Google AdSense) */}
